@@ -15,8 +15,16 @@ app.listen(port, () => console.log(`Server listening on port ${port}`)
 });
 ```
 Download nodemon on terminal to automatically update server page
- `npm install nodemon --save`
- `nodemon server.js`
+ `npm i nodemon --save-dev`
+
+Add this to `package.json`
+```
+  "scripts": {
+      "start": "node ./bin/www",
+      "devstart": "nodemon ./bin/www",
+      "serverstart": "DEBUG=express-locallibrary-tutorial:* npm run devstart"
+    },
+```
 
 **Exporting and Importing Modules**
 Filename: `Mod.js`
@@ -157,3 +165,6 @@ app.use(function (req, res, next) {
   res.status(404).send("Sorry can't find that!")
 })
 ```
+**Skeleton Website**
+`npm install express-generator`
+`express --no-view`
