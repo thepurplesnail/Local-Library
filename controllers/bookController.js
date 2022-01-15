@@ -1,4 +1,17 @@
 var Book = require('../models/book');
+var BookGenre = require('../models/bookGenre');
+
+const synchronize = async () => {
+    try {
+        await Book.sync();
+        console.log("The table for the Book model has been synced!");
+        await BookGenre.sync({alter: true});
+        console.log("The table for the BookGenre model has been synced!");
+
+    } catch(err) { console.log(err); }
+}
+  
+Promise.resolve().then(synchronize());
 
 exports.index = function(req, res) {
     res.send('NOT IMPLEMENTED: Site Home Page');

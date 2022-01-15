@@ -1,4 +1,14 @@
 var BookInstance = require('../models/bookinstance');
+const sequelize = require('../database');
+
+const synchronize = async () => {
+    try{
+        await BookInstance.sync();
+        console.log("The table for the BookInstance model has been synced!");
+    } catch (err) { console.log (err); }
+}
+  
+Promise.resolve().then(synchronize());
 
 // Display list of all BookInstances.
 exports.bookinstance_list = function(req, res) {

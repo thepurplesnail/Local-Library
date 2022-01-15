@@ -1,4 +1,14 @@
 var Author = require('../models/author');
+var sequelize = require('../database');
+
+Promise.resolve().then(sequelize.auth());
+
+const synchronize = async () => {
+    await Author.sync();
+    console.log("The table for the author model has been synced!");
+  }
+  
+Promise.resolve().then(synchronize());
 
 // Display list of all Authors.
 exports.author_list = function(req, res) {

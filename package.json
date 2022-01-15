@@ -8,15 +8,18 @@
     "serverstart": "DEBUG=express-locallibrary-tutorial:* npm run devstart"
   },
   "dependencies": {
-    "async": "^3.2.2",
+    "async": "^3.2.3",
+    "asynckit": "file:node_modules/asynckit",
     "cookie-parser": "~1.4.4",
     "debug": "~2.6.9",
     "express": "~4.16.1",
     "morgan": "~1.9.1",
     "mysql2": "^2.3.3",
-    "sequelize": "^7.0.0-alpha.2"
+    "sequelize": "^7.0.0-alpha.2",
+    "sqlite3": "^5.0.2"
   },
   "devDependencies": {
+    "@types/async": "^3.2.12",
     "nodemon": "^2.0.15"
   }
 }

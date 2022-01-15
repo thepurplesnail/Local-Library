@@ -1,4 +1,12 @@
 var Genre = require('../models/genre');
+const sequelize = require('../database');
+
+const synchronize = async () => {
+    await Genre.sync();
+    console.log("The table for the Genre model has been synced!");
+  }
+  
+Promise.resolve().then(synchronize());
 
 // Display list of all Genre.
 exports.genre_list = function(req, res) {

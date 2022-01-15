@@ -1,26 +1,27 @@
+// Defines model called Author and represents the table Author in the database
+const { get } = require('express/lib/response');
 const { Sequelize, DataTypes } = require('sequelize');
-const sequelize = new Sequelize('sqlite::memory:');
+const sequelize = require('../database');
 
-const User = sequelize.define('Author', {
+const Author = sequelize.define('author', {
   // Model attributes are defined here
   first_name: {
     type: DataTypes.STRING,
     allowNull: false,
     len: [0, 100]
   },
-  last_name: {
+  family_name: {
     type: DataTypes.STRING,
     allowNull: false,
     len: [0, 100]            
     
   },
-  fullName: {
+  // virtual for author full name
+  full_name: {
     type: DataTypes.VIRTUAL,
     get() {
-      return `${this.firstName} ${this.lastName}`;
-    },
-    set(value) {
-      throw new Error('Do not try to set the `fullName` value!');
+      if (this.first_name && this.family_name) return `${this.first_name} ${this.family_name}`;
+      return "";
     }
   },
   date_of_birth: {
@@ -28,8 +29,24 @@ const User = sequelize.define('Author', {
   },
   date_of_death: {
       type: DataTypes.DATE
+  },
+  // virtual for author lifespan
+  lifespan: {
+    type: DataTypes.VIRTUAL,
+    get() {
+      let lifetime = "";
+      if (this.date_of_birth) lifetime += this.date_of_birth;
+      lifetime += " - ";
+      if (this.date_of_death) lifetime += this.date_of_death;
+      return lifetime;
+    }
+  },
+  url: {
+    type: DataTypes.VIRTUAL,
+    get(){
+      return '/catalog/author/' + this._id;
+    }
   }
-}, {
-  // Other model options go here
-  freezeTableName: true
 });
+
+module.exports = Author;

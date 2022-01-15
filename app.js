@@ -10,27 +10,6 @@ var catologRouter = require('./routes/catalog');
 
 var app = express();
 
-// connect to Sequelize ORM
-const { Sequelize } = require('sequelize');
-
-const sequelize = new Sequelize('locallib', 'root', 'WatermelonCandy14#', {
-  host: 'localhost',
-  dialect: 'mysql'
-});
-
-const auth = async () => {
-  try {
-    await sequelize.authenticate();
-    console.log('Connection has been established successfully.');
-  } catch (error) {
-    console.error('Unable to connect to the database:', error);
-  }
-}
-
-Promise.resolve().then(auth());
-
-
-
 // implement middleware
 app.use(logger('dev'));
 app.use(express.json());
