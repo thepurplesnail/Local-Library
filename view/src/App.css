@@ -1,0 +1,17 @@
+#App {
+  margin-top: 2rem;
+}
+
+ul.no-bullets{
+  list-style-type: none;
+}
+
+main{
+  margin-left: 20vw;
+  margin-top: -40vh;
+}
+
+.row{
+  border-width: 10px;
+  border-color: rgb(0, 0, 0);
+}
