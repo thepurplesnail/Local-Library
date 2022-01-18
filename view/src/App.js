@@ -11,9 +11,9 @@ function App() {
       <body>
         <BrowserRouter>
           <Routes>
+            <Route path="*" element = {<Navigate to = "/catalog/*" />} />
             <Route path="/" element = {<Navigate to = "/catalog" />} />
-            <Route path="/catalog/*" element={<Sidebar />} />
-            <Route path="*" element={<main style={{ padding: "1rem" }}> <p>There's nothing here!</p> </main>} />
+            <Route path="/catalog/*" element={<Sidebar/>} />
           </Routes>
         </BrowserRouter>
 
