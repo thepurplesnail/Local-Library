@@ -38,6 +38,7 @@ export default function Sidebar() {
           <Route path = '/author/create' element = {<CreateAuthor/>}/>
           <Route path = '/genre/create' element = {<CreateGenre/>}/>
           <Route path = '/bookinstance/create' element = {<CreateBookInstance/>}/>
+          <Route path="*" element={<main style={{ padding: "1rem" }}> <p>There's nothing here!</p> </main>} />
         </Routes>
       </div>
         
