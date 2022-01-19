@@ -20,7 +20,7 @@ const synchronize = async () => {
   
 Promise.resolve().then(synchronize());
 
-// get /
+// GET /catalog
 
 exports.index = function(req, res) {
     
@@ -48,9 +48,18 @@ exports.index = function(req, res) {
 };
 
 // Display list of all books.
-// get /books
-exports.book_list = function(req, res) {
-    res.send('NOT IMPLEMENTED: Book list');
+// GET /catalog/books
+exports.book_list = async function(req, res) {
+    let books = await Book.findAll();
+    let arr = [];
+    for (let book of books){
+        let hash = {}
+        for (let key in book) 
+            hash[key] = book[key];
+        hash['dataValues']['author'] = await Author.findByPk(book.authorId);
+        arr.push(hash['dataValues']);
+    }
+    res.json(arr);
 };
 
 // Display detail page for a specific book.
