@@ -1,5 +1,12 @@
 var Book = require('../models/book');
 var BookGenre = require('../models/bookGenre');
+var Author = require('../models/author');
+var Genre = require('../models/genre');
+var BookInstance = require('../models/bookinstance');
+var async = require('async');
+
+const sequelize = require('../database'); 
+Promise.resolve().then(sequelize.auth());
 
 const synchronize = async () => {
     try {
@@ -13,11 +20,35 @@ const synchronize = async () => {
   
 Promise.resolve().then(synchronize());
 
+// get /
+
 exports.index = function(req, res) {
-    res.send('NOT IMPLEMENTED: Site Home Page');
+    
+    async.parallel({
+        "bookCount": callback => {
+            Book.count().then(c => callback(null, c));
+        }, 
+        "copiesCount": callback => {
+            BookInstance.count().then(c => callback(null, c));
+        },
+        "availableCopiesCount": callback => {
+            BookInstance.count({
+                where: { 'status': 'Available' }
+            }).then(c => callback(null, c)); 
+        },
+        "authorCount": callback => {
+            Author.count().then(c => callback(null, c)); 
+        },
+        "genreCount": callback => {
+            Genre.count().then(c => callback(null, c));
+        }
+    }).then(results => res.json(results))
+    .catch(err => console.log(err));  
+    
 };
 
 // Display list of all books.
+// get /books
 exports.book_list = function(req, res) {
     res.send('NOT IMPLEMENTED: Book list');
 };

@@ -1,6 +1,7 @@
 import './App.css';
 import {Outlet, Route, Routes, Navigate, BrowserRouter} from 'react-router-dom';
-import Sidebar from './routes/sidebar';
+import Sidebar from './components/sidebar';
+import React, {useState, useEffect} from 'react';
 
 function App() {
   return (
@@ -11,12 +12,11 @@ function App() {
       <body>
         <BrowserRouter>
           <Routes>
+            <Route path="*" element = {<Navigate to = "/catalog/*" />} />
             <Route path="/" element = {<Navigate to = "/catalog" />} />
-            <Route path="/catalog/*" element={<Sidebar />} />
-            <Route path="*" element={<main style={{ padding: "1rem" }}> <p>There's nothing here!</p> </main>} />
+            <Route path="/catalog/*" element={<Sidebar/>} />
           </Routes>
         </BrowserRouter>
-
       </body>
       <Outlet/>
     </div>
