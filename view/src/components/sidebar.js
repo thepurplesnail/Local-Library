@@ -7,9 +7,9 @@ import Welcome from './welcome';
 import CreateBook from './create_book';
 import CreateAuthor from './create_author';
 import CreateGenre from './create_genre';
-import CreateBookInstance from './create_bookinstance';
+import CreateBookInstance from './create_bookinstance.js';
 
-export default function Sidebar() {
+export default function Sidebar(props) {
     return (
       <div>
         <div className = 'row'>
@@ -38,6 +38,7 @@ export default function Sidebar() {
           <Route path = '/author/create' element = {<CreateAuthor/>}/>
           <Route path = '/genre/create' element = {<CreateGenre/>}/>
           <Route path = '/bookinstance/create' element = {<CreateBookInstance/>}/>
+          <Route path="*" element={<main style={{ padding: "1rem" }}> <p>There's nothing here!</p> </main>} />
         </Routes>
       </div>
         

@@ -83,7 +83,7 @@ async function bookInstanceCreate(book, imprint, due_back, status, cb) {
     var bookinstance = await BookInstance.create(bookinstancedetail); 
     console.log('>>>>>>>>>> New BookInstanceId: ' + bookinstance.id);
     bookinstances.push(bookinstance);
-    cb(null, book);
+    cb(null, bookInstance);
   } catch (err){
     console.log('ERROR CREATING BookInstance: ' + bookinstance);
     cb(err, null);
