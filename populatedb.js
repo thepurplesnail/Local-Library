@@ -59,7 +59,7 @@ async function bookCreate(title, summary, isbn, author, genre, cb) {
     var book = await Book.create(bookdetail);
     if (genre) 
       for (let g of genre){
-        await book.addGenres(g); // {genreId: g.id, bookId: book.id} references genre model (can be > 1)
+        await book.addGenres(g); // references genre model (can be > 1)
         console.log(`>>>>>>>>>> New book_genre instance: ${g.id}`);
       }
     console.log('>>>>>>>>>> New Book: ' + book.title);
