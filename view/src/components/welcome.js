@@ -1,8 +1,8 @@
 import axios from 'axios';
 import React, {useState, useEffect} from 'react';
 
-export default function Welcome(props) {
-  const [post, setPost] = useState([]);
+export default function Welcome() {
+  const [post, setPost] = useState(null);
   
   const baseURL = "http://localhost:5000/";
 
@@ -13,7 +13,7 @@ export default function Welcome(props) {
   }, [post]);
 
   if (!post) return null;
-
+  
   return(
       <main style={{ padding: "1rem"}}>
         <div>
