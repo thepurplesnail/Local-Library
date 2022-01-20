@@ -44,7 +44,7 @@ const Author = sequelize.define('author', {
   url: {
     type: DataTypes.VIRTUAL,
     get(){
-      return '/catalog/author/' + this._id;
+      return '/catalog/author/' + this.id;
     }
   }
 });

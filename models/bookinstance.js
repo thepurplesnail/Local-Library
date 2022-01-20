@@ -20,7 +20,7 @@ const BookInstance = sequelize.define('bookinstance', {
     url: {
         type: DataTypes.VIRTUAL,
         get(){
-            return '/catalog/bookinstance/' + this._id;
+            return '/catalog/bookinstance/' + this.id;
         }
     }
 });
