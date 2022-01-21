@@ -7,9 +7,13 @@ export default function Welcome() {
   const baseURL = "http://localhost:5000/";
 
   useEffect(() => {
+    let isMounted = true;
+
     axios.get(baseURL).then(res => {
-      setPost(res.data);
-    });
+      if (isMounted) setPost(res.data)
+    })
+    
+    return () => isMounted = false
   }, [post]);
 
   if (!post) return null;
