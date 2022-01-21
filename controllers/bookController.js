@@ -25,46 +25,62 @@ Promise.resolve().then(synchronize());
 exports.index = function(req, res) {
     
     async.parallel({
-        "bookCount": callback => {
-            Book.count().then(c => callback(null, c));
-        }, 
-        "copiesCount": callback => {
-            BookInstance.count().then(c => callback(null, c));
-        },
-        "availableCopiesCount": callback => {
+        "bookCount": callback => 
+            Book.count()
+            .then(c => callback(null, c))
+        , 
+        "copiesCount": callback =>
+             BookInstance.count()
+             .then(c => callback(null, c))
+        ,
+        "availableCopiesCount": callback => 
             BookInstance.count({
                 where: { 'status': 'Available' }
-            }).then(c => callback(null, c)); 
-        },
-        "authorCount": callback => {
-            Author.count().then(c => callback(null, c)); 
-        },
-        "genreCount": callback => {
-            Genre.count().then(c => callback(null, c));
-        }
-    }).then(results => res.json(results))
-    .catch(err => console.log(err));  
+            }).then(c => callback(null, c))
+        ,
+        "authorCount": callback => 
+            Author.count()
+            .then(c => callback(null, c))
+        ,
+        "genreCount": callback => 
+            Genre.count()
+            .then(c => callback(null, c))
+
+    }).then(results => 
+        setTimeout(() => res.json(results), 1000)
+    )
+    .catch(err => console.log(err))
     
 };
 
 // Display list of all books.
 // GET /catalog/books
 exports.book_list = async function(req, res) {
-    let books = await Book.findAll();
-    let arr = [];
-    for (let book of books){
-        let hash = {}
-        for (let key in book) 
-            hash[key] = book[key];
-        hash['dataValues']['author'] = await Author.findByPk(book.authorId);
-        arr.push(hash['dataValues']);
-    }
-    res.json(arr);
+    Book.findAll({include: [{model: Author, as: 'author'}]})
+    .then(result => 
+        setTimeout(() => res.json(result), 1000)
+    )
 };
 
 // Display detail page for a specific book.
+// GET /catalog/book/:id
 exports.book_detail = function(req, res) {
-    res.send('NOT IMPLEMENTED: Book detail: ' + req.params.id);
+    //res.send('NOT IMPLEMENTED: Book detail: ' + req.params.id);
+    async.parallel({
+        'book': callback => 
+            Book.findByPk(req.params.id, {include: [
+                {model: Author, as: 'author'},
+                {model: Genre, as: 'genres'}
+            ]}).then(result => callback(null, result))
+        ,
+        'book_instances': callback => 
+            BookInstance.findAll({where: {'bookId': req.params.id}})
+            .then(result => callback(null, result))
+    }).then(results => {
+        if (results) setTimeout( () => res.json(results), 1000 )
+        else throw Error('Book not found :(')
+        }
+    ).catch(err => console.log(err));
 };
 
 // Display book create form on GET.

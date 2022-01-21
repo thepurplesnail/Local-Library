@@ -1,10 +1,10 @@
-import {Link, useParams} from 'react-router-dom'
+import {Link, useParams, Navigate} from 'react-router-dom'
 import React, {useState, useEffect} from 'react'
 import axios from 'axios'
 
 import Btn from './icons/btn'
 
-export default () => {
+export default function BookDetails(){
     const [post, setPost] = useState(null);
     const bookId = useParams();
 
@@ -13,7 +13,7 @@ export default () => {
 
         axios.get(`http://localhost:5000/catalog/book/${bookId.id}`)
         .then(res => { if (isMounted) setPost(res.data) })
-        
+
         return () => isMounted = false
       }, [post, bookId.id])
     
@@ -21,7 +21,7 @@ export default () => {
     
 
     return(
-        <div className = 'row' style = {{marginTop: "-40vh", width: "80vw"}}>
+        <div className = 'row' style = {{marginTop: "-37vh", width: "80vw"}}>
             <Btn/>
             <main>
                 <h1>Title: {post.book.title}</h1>

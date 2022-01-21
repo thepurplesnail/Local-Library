@@ -15,19 +15,22 @@ export default function Books() {
   if (!post) return null;
   
   return ( 
-    <main style={{ padding: "1rem" }}>
-      <h1>Books</h1>
-      <ul style = {{marginTop: "1.5rem" }}>
-        {post.map(
-          book => 
-          <li>
-            <Link to = {`/catalog/book/${book.id}`} className = "text-decoration-none">
-              {book.title}
-            </Link> ({book.author.family_name}, {book.author.first_name})
-          </li>
-          )
-        } 
-      </ul>
-    </main>
+    <div className = 'mainContainer'>
+      <main style={{ padding: "1rem" }}>
+        <h1>Books</h1>
+        <ul style = {{marginTop: "1.5rem" }}>
+          {post.map(
+            book => 
+            <li key={book.id}>
+              <Link to = {`/catalog/book/${book.id}`} className = "text-decoration-none">
+                {book.title}
+              </Link> ({book.author.family_name}, {book.author.first_name})
+            </li>
+            )
+          } 
+        </ul>
+      </main>
+    </div>
+
   );
   }
