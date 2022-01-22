@@ -1,4 +1,4 @@
-import { Navigate, Link, useNavigate } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 
 export default function Btn(props){
     const navigate = useNavigate();
