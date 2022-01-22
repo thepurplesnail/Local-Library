@@ -25,7 +25,7 @@ export default function Sidebar() {
               <li><Link to="/catalog/book/create" className = "text-decoration-none">Create New Book</Link></li>
               <li><Link to="/catalog/author/create" className = "text-decoration-none">Create New Author</Link></li>
               <li><Link to="/catalog/genre/create" className = "text-decoration-none">Create New Genre</Link></li>
-              <li><Link to="/catalog/bookinstance/create" className = "text-decoration-none">Instance (Copy)</Link></li>
+              <li><Link to="/catalog/bookinstance/create" className = "text-decoration-none">Create New Instance (Copy)</Link></li>
             </ul>
           </div>
         </div>
