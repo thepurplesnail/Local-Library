@@ -27,7 +27,12 @@ export default function BookInstances(){
                     {post.map(instance => 
                         <li className = 'card total-card' key = {instance.id}>
                             <text>
-                                {instance.book.title}: {instance.imprint} - <Status stat = {instance.status}/>
+                                {instance.book.title}: {instance.imprint} - 
+                            </text>
+                            <text>
+                                <Status stat = {instance.status}/>
+                            </text>
+                            <text>
                                 {instance.status !== 'Available' ? `(Due: ${instance.due_back})` : ''}
                             </text>
                         </li>

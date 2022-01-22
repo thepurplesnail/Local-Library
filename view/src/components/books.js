@@ -26,9 +26,11 @@ export default function Books() {
             {post.map(
               book => 
               <li key={book.id} className = 'card total-card'>
-                <Link to = {`/catalog/book/${book.id}`} className = "text-decoration-none">
-                  {book.title}
-                </Link> ({book.author.family_name}, {book.author.first_name})
+                <text>
+                  <Link to = {`/catalog/book/${book.id}`} className = "text-decoration-none">
+                    {book.title}
+                  </Link> ({book.author.family_name}, {book.author.first_name})
+                </text>
               </li>
               )
             } 
