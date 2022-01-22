@@ -1,6 +1,7 @@
-const { Sequelize, DataTypes } = require('sequelize');
-const sequelize = require('../database');
-const Book = require('../models/book');
+const { Sequelize, DataTypes } = require('sequelize')
+const sequelize = require('../database')
+const Book = require('../models/book')
+const {DateTime} = require('luxon')
 
 const BookInstance = sequelize.define('bookinstance', {
     status: {
@@ -21,6 +22,12 @@ const BookInstance = sequelize.define('bookinstance', {
         type: DataTypes.VIRTUAL,
         get(){
             return '/catalog/bookinstance/' + this.id;
+        }
+    },
+    due_back_formatted: {
+        type: DataTypes.VIRTUAL,
+        get() { 
+            return DateTime.fromJSDate(this.due_back).toLocaleString(DateTime.DATE_MED);
         }
     }
 });
