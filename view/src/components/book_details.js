@@ -42,7 +42,7 @@ export default function BookDetails(){
                         <ul className = 'list-group'>
                             {post.book_instances ? 
                                 post.book_instances.map(instance => 
-                                    <li className = 'card'>
+                                    <li className = 'card' style = {{padding: '1rem'}}>
 
                                         <div className = {instance.status === 'Available' ? 'bg-success' : 'bg-danger'} 
                                             style = {{width: 'fit-content', 
