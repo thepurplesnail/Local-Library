@@ -33,7 +33,7 @@ export default function BookInstances(){
                                 <Status stat = {instance.status}/>
                             </text>
                             <text>
-                                {instance.status !== 'Available' ? `(Due: ${instance.due_back})` : ''}
+                                {instance.status !== 'Available' ? `(Due: ${instance.due_back_formatted})` : ''}
                             </text>
                         </li>
                     )}
