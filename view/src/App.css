@@ -6,16 +6,17 @@ ul.no-bullets{
   list-style-type: none;
 }
 
-main{
-  margin-left: 20vw;
-  padding: .2rem;
-  margin-top: -40vh;
-  
+ul.total-list{
+  margin-top: 1.5rem;
+  border: solid mediumslateblue;
+}
+
+.total-card{
+  width: 60vw;
+  padding: 1rem;
 }
 
 .backArrow{
-  margin-left: 15vw;
-  margin-top: 10vh;
   cursor: pointer;
 }
 
@@ -28,6 +29,13 @@ main{
   height: 20vw;
 }
 
-.card{
-  padding: 1rem;
+.btn-pg-container{
+  margin-left: 15vw;
+  display:flex;
+  align-items: flex-start;
+  margin-top: -35vh;
+}
+.welcome-pg{
+  margin-left: 18vw;
+  margin-top: -35vh;
 }
