@@ -21,8 +21,8 @@ export default function BookDetails(){
     if (!post) return null;
 
     return(
-        <div className = 'row' style = {{marginTop: '-47vh', marginBottom: '5vh'}}>
-            <Btn className = 'col-1'/>
+        <div className = 'row' style = {{marginTop: '-45vh', marginBottom: '5vh'}}>
+            <Btn className = 'col-1' url = '/catalog/books'/>
             <main className = 'col-8'>
                <h1>Title: {post.book.title}</h1>
                 <div style = {{width: '30vw'}}>
