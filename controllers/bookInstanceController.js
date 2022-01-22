@@ -1,19 +1,30 @@
-var BookInstance = require('../models/bookinstance');
-const sequelize = require('../database');
+var BookInstance = require('../models/bookinstance')
+var Book = require('../models/book')
+const sequelize = require('../database')
+var async = require('async')
+
+Promise.resolve().then(sequelize.auth())
 
 const synchronize = async () => {
     try{
         await BookInstance.sync();
-        console.log("The table for the BookInstance model has been synced!");
-    } catch (err) { console.log (err); }
+        console.log("The table for the BookInstance model has been synced!")
+    } catch (err) { console.log (err) }
 }
   
 Promise.resolve().then(synchronize());
 
 // Display list of all BookInstances.
+// GET /catalog/bookinstances
+
 exports.bookinstance_list = function(req, res) {
-    res.send('NOT IMPLEMENTED: BookInstance list');
-};
+    BookInstance.findAll({
+        include: {model: Book, as: 'book'}
+    })
+    .then(result => 
+        setTimeout(() => res.json(result), 1000))
+    .catch(err => res.send(err))
+}
 
 // Display detail page for a specific BookInstance.
 exports.bookinstance_detail = function(req, res) {
