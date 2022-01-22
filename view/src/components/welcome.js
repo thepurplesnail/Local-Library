@@ -19,7 +19,7 @@ export default function Welcome() {
   if (!post) return null;
   
   return(
-      <main style={{ padding: "1rem"}}>
+      <div className = 'welcome-pg'>
         <div>
           <h1>Local Library Home</h1> 
           <p>Welome to <em>LocalLibrary,</em> a very simple website built from Express and React!</p>
@@ -35,6 +35,6 @@ export default function Welcome() {
             <li><strong>Genres:</strong> {post.genreCount}</li>
           </ul>
         </div>
-      </main>
+      </div>
   );
 }
