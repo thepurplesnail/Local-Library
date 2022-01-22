@@ -21,9 +21,9 @@ export default function BookDetails(){
     if (!post) return null;
 
     return(
-        <div className = 'row' style = {{marginTop: '-45vh', marginBottom: '5vh'}}>
-            <Btn className = 'col-1' url = '/catalog/books'/>
-            <main className = 'col-8'>
+        <div className = 'btn-pg-container'>
+            <div style = {{padding: '1rem'}}><Btn url = '/catalog/books'/></div>
+            <div style = {{padding: '.2rem'}}>
                <h1>Title: {post.book.title}</h1>
                 <div style = {{width: '30vw'}}>
                     <p><strong>Author:</strong> {post.book.author.family_name}, {post.book.author.first_name}</p>
@@ -62,7 +62,7 @@ export default function BookDetails(){
 
                     </div>
                 </div>
-            </main>
+            </div>
         </div>
     );
 }
