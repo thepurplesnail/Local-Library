@@ -20,8 +20,8 @@ export default function BookInstances(){
 
     return(
         <div className = 'btn-pg-container'>
-            <div style = {{padding: '1rem'}}><Btn url = '/catalog'/></div>
-            <div style = {{padding: '.2rem'}}>
+            <div className = 'btn'><Btn url = '/catalog'/></div>
+            <div className = 'pg'>
                 <h1>Book Instances</h1>
                 <ul className = 'total-list list-group' >
                     {post.map(instance => 
