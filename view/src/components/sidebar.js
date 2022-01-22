@@ -13,22 +13,20 @@ import BookDetails from './book_details'
 export default function Sidebar() {
     return (
       <div>
-        <div className = 'row'>
-          <div className = 'col-sm-2'> 
-            <ul className = 'sidebar-nav' className = 'no-bullets'>
-              <li><Link to="/catalog" className = "text-decoration-none">Home</Link></li>
-              <li><Link to="/catalog/books" className = "text-decoration-none">All Books</Link></li>
-              <li><Link to="/catalog/authors" className = "text-decoration-none">All Authors</Link></li>
-              <li><Link to="/catalog/genres" className = "text-decoration-none">All Genres</Link></li>
-              <li><Link to="/catalog/bookinstances" className = "text-decoration-none">All Book-Instances</Link></li>
-              <p style = {{height: '3px', width: '8vw', margin: '.2rem', backgroundColor: 'mediumslateblue'}}></p>
-              <li><Link to="/catalog/book/create" className = "text-decoration-none">Create New Book</Link></li>
-              <li><Link to="/catalog/author/create" className = "text-decoration-none">Create New Author</Link></li>
-              <li><Link to="/catalog/genre/create" className = "text-decoration-none">Create New Genre</Link></li>
-              <li><Link to="/catalog/bookinstance/create" className = "text-decoration-none">Create New Instance (Copy)</Link></li>
-            </ul>
-          </div>
-        </div>
+        <span>
+          <ul className = 'sidebar-nav' className = 'no-bullets'>
+            <li><Link to="/catalog" className = "text-decoration-none">Home</Link></li>
+            <li><Link to="/catalog/books" className = "text-decoration-none">All Books</Link></li>
+            <li><Link to="/catalog/authors" className = "text-decoration-none">All Authors</Link></li>
+            <li><Link to="/catalog/genres" className = "text-decoration-none">All Genres</Link></li>
+            <li><Link to="/catalog/bookinstances" className = "text-decoration-none">All Book-Instances</Link></li>
+            <p style = {{height: '3px', width: '8vw', margin: '.2rem', backgroundColor: 'mediumslateblue'}}></p>
+            <li><Link to="/catalog/book/create" className = "text-decoration-none">Create New Book</Link></li>
+            <li><Link to="/catalog/author/create" className = "text-decoration-none">Create New Author</Link></li>
+            <li><Link to="/catalog/genre/create" className = "text-decoration-none">Create New Genre</Link></li>
+            <li><Link to="/catalog/bookinstance/create" className = "text-decoration-none">Create New Instance (Copy)</Link></li>
+          </ul>
+        </span>
         <Routes>
           <Route path = '/' element = {<Welcome/>}/>
           <Route path = '/books/' element = {<Books/>}/>
