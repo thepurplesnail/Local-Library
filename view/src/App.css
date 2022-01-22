@@ -8,10 +8,26 @@ ul.no-bullets{
 
 main{
   margin-left: 20vw;
+  padding: .2rem;
   margin-top: -40vh;
+  
 }
 
-.row{
-  border-width: 10px;
-  border-color: rgb(0, 0, 0);
+.backArrow{
+  margin-left: 15vw;
+  margin-top: 10vh;
+  cursor: pointer;
+}
+
+.backArrow:hover{
+  color:mediumslateblue;
+}
+
+.overflow-auto{
+  width: 30vw;
+  height: 20vw;
+}
+
+.card{
+  padding: 1rem;
 }
