@@ -4,6 +4,7 @@ import axios from 'axios'
 import '../App.css'
 
 import Btn from './icons/btn'
+import Status from './icons/status'
 
 export default function BookDetails(){
     const [post, setPost] = useState(null);
@@ -43,17 +44,7 @@ export default function BookDetails(){
                             {post.book_instances ? 
                                 post.book_instances.map(instance => 
                                     <li className = 'card' style = {{padding: '1rem'}}>
-
-                                        <div className = {instance.status === 'Available' ? 'bg-success' : 'bg-danger'} 
-                                            style = {{width: 'fit-content', 
-                                                    paddingLeft: '.5rem', paddingRight: '.5rem', 
-                                                    borderRadius: '10px', textAlign: 'center'}}
-                                        >
-                                            <text style = {{color: 'white'}}>
-                                                {instance.status}
-                                            </text>
-                                        </div>
-
+                                        <Status stat = {instance.status}/>
                                         <text><strong>Imprint:</strong> {instance.imprint}</text>
                                         <text><strong>Id:</strong> {instance.id}</text>
                                     </li>) 
