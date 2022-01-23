@@ -13,8 +13,8 @@ import BookDetails from './book_details'
 export default function Sidebar() {
     return (
       <div>
-        <span>
-          <ul className = 'sidebar-nav' className = 'no-bullets'>
+        <div className = 'sidebar'>
+          <ul className = 'no-bullets'>
             <li><Link to="/catalog" className = "text-decoration-none">Home</Link></li>
             <li><Link to="/catalog/books" className = "text-decoration-none">All Books</Link></li>
             <li><Link to="/catalog/authors" className = "text-decoration-none">All Authors</Link></li>
@@ -26,7 +26,7 @@ export default function Sidebar() {
             <li><Link to="/catalog/genre/create" className = "text-decoration-none">Create New Genre</Link></li>
             <li><Link to="/catalog/bookinstance/create" className = "text-decoration-none">Create New Instance (Copy)</Link></li>
           </ul>
-        </span>
+        </div>
         <Routes>
           <Route path = '/' element = {<Welcome/>}/>
           <Route path = '/books/' element = {<Books/>}/>
