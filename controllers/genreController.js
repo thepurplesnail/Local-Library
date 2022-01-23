@@ -9,8 +9,10 @@ const synchronize = async () => {
 Promise.resolve().then(synchronize());
 
 // Display list of all Genre.
+// GET /catalog/genres
 exports.genre_list = function(req, res) {
-    res.send('NOT IMPLEMENTED: Genre list');
+    Genre.findAll().then(result => 
+        setTimeout(() => res.json(result), 500))
 };
 
 // Display detail page for a specific Genre.
