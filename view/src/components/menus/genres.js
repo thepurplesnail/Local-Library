@@ -9,6 +9,7 @@ export default function Genres(){
         let isMounted = true;
         axios.get('http://localhost:5000/catalog/genres')
         .then(res => {if (isMounted) setPost(res.data)});
+        return () => {isMounted = false;}
     })
 
     if (!post) return null
