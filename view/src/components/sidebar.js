@@ -9,6 +9,7 @@ import CreateAuthor from './forms/create_author';
 import CreateGenre from './forms/create_genre';
 import CreateBookInstance from './forms/create_bookinstance';
 import BookDetails from './details/book_details'
+import GenreDetails from './details/genre_details'
 
 export default function Sidebar() {
     return (
@@ -38,6 +39,7 @@ export default function Sidebar() {
           <Route path = '/genre/create' element = {<CreateGenre/>}/>
           <Route path = '/bookinstance/create' element = {<CreateBookInstance/>}/>
           <Route path = '/book/:id' element = {<BookDetails/>}/>
+          <Route path = '/genre/:id' element = {<GenreDetails/>}/>
           <Route path="*" element={<main style={{ padding: "1rem" }}> <p>There's nothing here!</p> </main>} />
         </Routes>
       </div>
