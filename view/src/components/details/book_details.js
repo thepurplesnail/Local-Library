@@ -46,7 +46,10 @@ export default function BookDetails(){
                                     <li className = 'card' key = {instance.id} style = {{padding: '1rem'}}>
                                         <Status stat = {instance.status}/>
                                         <text><strong>Imprint:</strong> {instance.imprint}</text>
-                                        <text><strong>Id:</strong> {instance.id}</text>
+                                        <text>
+                                            <strong>Id: </strong>
+                                            <Link to = {`/catalog/bookinstance/${instance.id}`} className = 'text-decoration-none'>{instance.id}</Link>
+                                        </text>
                                     </li>) 
                                 : ""}
                         </ul>
