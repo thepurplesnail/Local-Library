@@ -22,8 +22,8 @@ export default function BookDetails(){
 
     return(
         <div className = 'btn-pg-container'>
-            <div style = {{padding: '1rem'}}><Btn url = '/catalog/books'/></div>
-            <div style = {{padding: '.2rem'}}>
+            <div className = 'btn'><Btn url = '/catalog/books'/></div>
+            <div className = 'pg'>
                <h1>Title: {post.book.title}</h1>
                 <div style = {{width: '30vw'}}>
                     <p><strong>Author:</strong> {post.book.author.family_name}, {post.book.author.first_name}</p>

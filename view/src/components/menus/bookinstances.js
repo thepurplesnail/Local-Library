@@ -16,7 +16,6 @@ export default function BookInstances(){
     }, [post])
 
     if (!post) return null
-    else console.log(post)
 
     return(
         <div className = 'btn-pg-container'>
@@ -26,15 +25,15 @@ export default function BookInstances(){
                 <ul className = 'total-list list-group' >
                     {post.map(instance => 
                         <li className = 'card total-card' key = {instance.id}>
-                            <text>
+                            <span>
                                 {instance.book.title}: {instance.imprint} - 
-                            </text>
-                            <text>
+                            </span>
+                            <span>
                                 <Status stat = {instance.status}/>
-                            </text>
-                            <text>
+                            </span>
+                            <span>
                                 {instance.status !== 'Available' ? `(Due: ${instance.due_back_formatted})` : ''}
-                            </text>
+                            </span>
                         </li>
                     )}
                 </ul>
