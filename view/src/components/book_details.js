@@ -43,7 +43,7 @@ export default function BookDetails(){
                         <ul className = 'list-group'>
                             {post.book_instances ? 
                                 post.book_instances.map(instance => 
-                                    <li className = 'card' style = {{padding: '1rem'}}>
+                                    <li className = 'card' key = {instance.id} style = {{padding: '1rem'}}>
                                         <Status stat = {instance.status}/>
                                         <text><strong>Imprint:</strong> {instance.imprint}</text>
                                         <text><strong>Id:</strong> {instance.id}</text>
