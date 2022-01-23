@@ -1,7 +1,7 @@
 import './App.css';
 import {Outlet, Route, Routes, Navigate, BrowserRouter} from 'react-router-dom';
 import Sidebar from './components/sidebar';
-import React, {useState, useEffect} from 'react';
+import React from 'react';
 
 function App() {
   return (

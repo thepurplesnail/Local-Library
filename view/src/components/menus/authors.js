@@ -6,8 +6,8 @@ export default function Authors(){
 
     useEffect(() => {
         let isMounted = true;
-        axios.get('http://localhost:5000/catalog/authors').
-        then( res => {if (isMounted) setPost(res.data)} );
+        axios.get('http://localhost:5000/catalog/authors')
+        .then( res => {if (isMounted) setPost(res.data)} );
         return () => (isMounted = false);
     }, [post])
 
