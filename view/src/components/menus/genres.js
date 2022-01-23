@@ -1,7 +1,7 @@
 import axios from 'axios'
 import {useState, useEffect} from 'react'
 import Btn from '../icons/btn'
-import {Link} from 'axios'
+import {Link} from 'react-router-dom'
 
 export default function Genres(){
     const [post, setPost] = useState(null)
@@ -20,7 +20,12 @@ export default function Genres(){
                 <h1>Genres</h1>
                 <ul className = 'total-list list-group'>
                     {post.map(genre =>
-                        <li key = {genre.id} className = 'card total-card'>{genre.name}</li>
+                        <li key = {genre.id} className = 'card total-card'>
+                            <Link to = {`/catalog/genre/${genre.id}`}
+                                className = 'text-decoration-none'>
+                                {genre.name}
+                            </Link>
+                        </li>
                         )}
                 </ul>
             </div>
