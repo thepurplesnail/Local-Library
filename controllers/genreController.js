@@ -1,5 +1,7 @@
-var Genre = require('../models/genre');
-const sequelize = require('../database');
+var Genre = require('../models/genre')
+var Book = require('../models/book')
+var async = require('async')
+const sequelize = require('../database')
 
 const synchronize = async () => {
     await Genre.sync();
@@ -16,8 +18,14 @@ exports.genre_list = function(req, res) {
 };
 
 // Display detail page for a specific Genre.
+// GET /catalog/genre/:id
 exports.genre_detail = function(req, res) {
-    res.send('NOT IMPLEMENTED: Genre detail: ' + req.params.id);
+    //res.send('NOT IMPLEMENTED: Genre detail: ' + req.params.id);
+    Genre.findByPk(req.params.id, {include: {model: Book, as: 'books'}})
+    .then(result => 
+        setTimeout(() => 
+        res.json(result), 300))
+    .catch(err => res.json(error))
 };
 
 // Display Genre create form on GET.

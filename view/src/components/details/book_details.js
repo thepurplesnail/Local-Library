@@ -19,7 +19,8 @@ export default function BookDetails(){
       }, [post, bookId.id])
     
     if (!post) return null;
-
+    console.log(post);
+    
     return(
         <div className = 'btn-pg-container'>
             <div className = 'btn'><Btn url = '/catalog/books'/></div>
