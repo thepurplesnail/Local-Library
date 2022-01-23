@@ -1,4 +1,5 @@
 import {useState, useEffect} from 'react'
+import {Link} from 'react-router-dom'
 import axios from 'axios'
 import Btn from '../icons/btn'
 export default function Authors(){
@@ -22,7 +23,11 @@ export default function Authors(){
                 <ul className = 'total-list list-group'>
                     {post.map(author => 
                         <li key={author.id} className = 'card total-card'>
-                            <text>{author.family_name}, {author.first_name} ({author.date_of_birth_formatted} - {author.date_of_death_formatted})</text>
+                            <text>
+                                <Link to = {`/catalog/author/${author.id}`} className = 'text-decoration-none'>
+                                    {author.family_name}, {author.first_name}
+                                </Link> ({author.date_of_birth_formatted} - {author.date_of_death_formatted})
+                            </text>
                         </li>
                         )}
                 </ul>
