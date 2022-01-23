@@ -1,14 +1,14 @@
 import {Route, Routes, Link} from "react-router-dom";
-import Books from "./books";
-import Authors from './authors';
-import Genres from './genres';
-import BookInstances from './bookinstances';
+import Books from './menus/books';
+import Authors from './menus/authors';
+import Genres from './menus/genres';
+import BookInstances from './menus/bookinstances';
 import Welcome from './welcome';
-import CreateBook from './create_book';
-import CreateAuthor from './create_author';
-import CreateGenre from './create_genre';
-import CreateBookInstance from './create_bookinstance';
-import BookDetails from './book_details'
+import CreateBook from './forms/create_book';
+import CreateAuthor from './forms/create_author';
+import CreateGenre from './forms/create_genre';
+import CreateBookInstance from './forms/create_bookinstance';
+import BookDetails from './details/book_details'
 
 export default function Sidebar() {
     return (
