@@ -51,7 +51,7 @@ const Author = sequelize.define('author', {
   date_of_birth_formatted: {
     type: DataTypes.VIRTUAL,
     get(){
-      return this.date_of_birth ? DateTime.fromJSDate(this.date_of_birth).toLocaleString(DateTime.DATE_MED) : ''
+      return this.date_of_birth ? DateTime.fromJSDate(this.date_of_birth).toLocaleString(DateTime.DATE_MED) : '?'
     }
   },
   date_of_death_formatted: {
