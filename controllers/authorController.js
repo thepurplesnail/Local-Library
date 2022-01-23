@@ -1,4 +1,5 @@
 var Author = require('../models/author');
+var Book = require('../models/book')
 var sequelize = require('../database');
 
 Promise.resolve().then(sequelize.auth());
@@ -18,8 +19,10 @@ exports.author_list = function(req, res) {
 };
 
 // Display detail page for a specific Author.
+// GET /catalog/author/:id
 exports.author_detail = function(req, res) {
-    res.send('NOT IMPLEMENTED: Author detail: ' + req.params.id);
+    Author.findByPk(req.params.id, {include: {model: Book, as: 'books'}})
+    .then(results => res.json(results));
 };
 
 // Display Author create form on GET.
