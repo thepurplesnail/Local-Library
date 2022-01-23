@@ -13,7 +13,8 @@ Promise.resolve().then(synchronize());
 // Display list of all Authors.
 // GET /catalog/authors
 exports.author_list = function(req, res) {
-    Author.findAll().then(result => res.json(result))
+    Author.findAll().then(result => 
+        setTimeout(res.json(result), 500))
 };
 
 // Display detail page for a specific Author.

@@ -47,7 +47,7 @@ exports.index = function(req, res) {
             .then(c => callback(null, c))
 
     }).then(results => 
-        setTimeout(() => res.json(results), 1000)
+        setTimeout(() => res.json(results), 500)
     )
     .catch(err => console.log(err))
     
@@ -58,7 +58,7 @@ exports.index = function(req, res) {
 exports.book_list = async function(req, res) {
     Book.findAll({include: [{model: Author, as: 'author'}]})
     .then(result => 
-        setTimeout(() => res.json(result), 1000)
+        setTimeout(() => res.json(result), 500)
     )
 };
 
@@ -77,7 +77,7 @@ exports.book_detail = function(req, res) {
             BookInstance.findAll({where: {'bookId': req.params.id}})
             .then(result => callback(null, result))
     }).then(results => {
-        if (results) setTimeout( () => res.json(results), 1000 )
+        if (results) setTimeout( () => res.json(results), 500 )
         else throw Error('Book not found :(')
         }
     ).catch(err => console.log(err));
