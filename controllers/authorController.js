@@ -11,8 +11,9 @@ const synchronize = async () => {
 Promise.resolve().then(synchronize());
 
 // Display list of all Authors.
+// GET /catalog/authors
 exports.author_list = function(req, res) {
-    res.send('NOT IMPLEMENTED: Author list');
+    Author.findAll().then(result => res.json(result))
 };
 
 // Display detail page for a specific Author.

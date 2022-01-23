@@ -2,6 +2,7 @@
 const { get } = require('express/lib/response');
 const { Sequelize, DataTypes } = require('sequelize');
 const sequelize = require('../database');
+const {DateTime} = require('luxon')
 
 const Author = sequelize.define('author', {
   // Model attributes are defined here
@@ -46,7 +47,20 @@ const Author = sequelize.define('author', {
     get(){
       return '/catalog/author/' + this.id;
     }
+  },
+  date_of_birth_formatted: {
+    type: DataTypes.VIRTUAL,
+    get(){
+      return this.date_of_birth ? DateTime.fromJSDate(this.date_of_birth).toLocaleString(DateTime.DATE_MED) : ''
+    }
+  },
+  date_of_death_formatted: {
+    type: DataTypes.VIRTUAL,
+    get(){
+      return this.date_of_death ? DateTime.fromJSDate(this.date_of_death).toLocaleString(DateTime.DATE_MED) : ''
+    }
   }
+
 });
 
 module.exports = Author;
