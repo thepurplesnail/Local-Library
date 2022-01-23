@@ -1,4 +1,3 @@
-
 export default function Status (props) {
     return(
         <text className = {props.stat === 'Available' ? 'bg-success' : props.stat === 'Maintenance' ? 'bg-danger' : 'bg-warning'} 

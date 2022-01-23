@@ -1,16 +1,17 @@
-import {Route, Routes, Link} from "react-router-dom";
-import Books from './menus/books';
-import Authors from './menus/authors';
-import Genres from './menus/genres';
-import BookInstances from './menus/bookinstances';
-import Welcome from './welcome';
-import CreateBook from './forms/create_book';
-import CreateAuthor from './forms/create_author';
-import CreateGenre from './forms/create_genre';
-import CreateBookInstance from './forms/create_bookinstance';
+import {Route, Routes, Link} from "react-router-dom"
+import Books from './menus/books'
+import Authors from './menus/authors'
+import Genres from './menus/genres'
+import BookInstances from './menus/bookinstances'
+import Welcome from './welcome'
+import CreateBook from './forms/create_book'
+import CreateAuthor from './forms/create_author'
+import CreateGenre from './forms/create_genre'
+import CreateBookInstance from './forms/create_bookinstance'
 import BookDetails from './details/book_details'
 import GenreDetails from './details/genre_details'
 import AuthorDetails from './details/author_details'
+import BookInstanceDetails from './details/bookinstance_details'
 
 export default function Sidebar() {
     return (
@@ -42,6 +43,7 @@ export default function Sidebar() {
           <Route path = '/book/:id' element = {<BookDetails/>}/>
           <Route path = '/genre/:id' element = {<GenreDetails/>}/>
           <Route path = '/author/:id' element = {<AuthorDetails/>}/>
+          <Route path = '/bookinstance/:id' element = {<BookInstanceDetails/>}/>
           <Route path="*" element={<main style={{ padding: "1rem" }}> <p>There's nothing here!</p> </main>} />
         </Routes>
       </div>

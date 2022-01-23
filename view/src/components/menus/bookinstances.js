@@ -2,6 +2,7 @@ import axios from 'axios'
 import {useState, useEffect} from 'react'
 import Btn from '../icons/btn'
 import Status from '../icons/status'
+import {Link} from 'react-router-dom'
 
 export default function BookInstances(){
     const [post, setPost] = useState(null)
@@ -26,7 +27,8 @@ export default function BookInstances(){
                     {post.map(instance => 
                         <li className = 'card total-card' key = {instance.id}>
                             <span>
-                                {instance.book.title}: {instance.imprint} - 
+                                <Link to = {`/catalog/bookinstance/${instance.id}`} className = 'text-decoration-none'>{instance.book.title}:
+                                </Link> {instance.imprint} - 
                             </span>
                             <span>
                                 <Status stat = {instance.status}/>

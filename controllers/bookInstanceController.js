@@ -16,7 +16,6 @@ Promise.resolve().then(synchronize());
 
 // Display list of all BookInstances.
 // GET /catalog/bookinstances
-
 exports.bookinstance_list = function(req, res) {
     BookInstance.findAll({
         include: {model: Book, as: 'book'}
@@ -27,8 +26,10 @@ exports.bookinstance_list = function(req, res) {
 }
 
 // Display detail page for a specific BookInstance.
+// GET /catalog/bookinstance/:id
 exports.bookinstance_detail = function(req, res) {
-    res.send('NOT IMPLEMENTED: BookInstance detail: ' + req.params.id);
+    BookInstance.findByPk(req.params.id, {include: {model: Book, as: 'book'}})
+    .then(result => res.json(result));
 };
 
 // Display BookInstance create form on GET.
