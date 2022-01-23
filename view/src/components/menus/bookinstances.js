@@ -1,7 +1,7 @@
 import axios from 'axios'
 import {useState, useEffect} from 'react'
-import Btn from './icons/btn'
-import Status from './icons/status'
+import Btn from '../icons/btn'
+import Status from '../icons/status'
 
 export default function BookInstances(){
     const [post, setPost] = useState(null)

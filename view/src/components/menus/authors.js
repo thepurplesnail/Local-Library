@@ -1,6 +1,6 @@
 import {useState, useEffect} from 'react'
 import axios from 'axios'
-import Btn from './icons/btn'
+import Btn from '../icons/btn'
 export default function Authors(){
     const [post, setPost] = useState(null)
 

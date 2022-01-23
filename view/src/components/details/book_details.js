@@ -1,10 +1,9 @@
 import {Link, useParams} from 'react-router-dom'
 import React, {useState, useEffect} from 'react'
 import axios from 'axios'
-import '../App.css'
 
-import Btn from './icons/btn'
-import Status from './icons/status'
+import Btn from '../icons/btn'
+import Status from '../icons/status'
 
 export default function BookDetails(){
     const [post, setPost] = useState(null);

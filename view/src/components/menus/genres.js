@@ -1,6 +1,7 @@
 import axios from 'axios'
 import {useState, useEffect} from 'react'
-import Btn from './icons/btn'
+import Btn from '../icons/btn'
+import {Link} from 'axios'
 
 export default function Genres(){
     const [post, setPost] = useState(null)
