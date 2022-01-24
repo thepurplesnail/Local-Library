@@ -2,6 +2,7 @@ var Genre = require('../models/genre')
 var Book = require('../models/book')
 var async = require('async')
 const sequelize = require('../database')
+const { body,validationResult } = require("express-validator")
 
 const synchronize = async () => {
     await Genre.sync();
@@ -28,29 +29,46 @@ exports.genre_detail = function(req, res) {
     .catch(err => res.json(error))
 };
 
-// Display Genre create form on GET.
-exports.genre_create_get = function(req, res) {
-    res.send('NOT IMPLEMENTED: Genre create GET');
-};
-
 // Handle Genre create on POST.
-exports.genre_create_post = function(req, res) {
-    res.send('NOT IMPLEMENTED: Genre create POST');
-};
+// GET /catalog/genre/create
+exports.genre_create_post = [
+    // validate and sanitize entry
+    body('name', 'Genre name required!').trim().isLength({ min: 1 }).escape(),
+    
+    (req, res, next) => {
+        // Extract the validation errors from a request.
+        const errors = validationResult(req);
 
-// Display Genre delete form on GET.
-exports.genre_delete_get = function(req, res) {
-    res.send('NOT IMPLEMENTED: Genre delete GET');
-};
+        // Create a genre object with escaped and trimmed data.
+        var genre = { name: req.body.name }
+
+        if (!errors.isEmpty()) {
+            // There are errors. Render the form again with sanitized values/error messages.
+            res.json(errors);
+        }
+
+        else {
+            Genre.findOne({where: {'name': req.body.name}})
+            .then((err, found_genre) => {
+                if (err) return next(err);
+                // genre exists so redirect to details page
+                if (found_genre) res.redirect(found_genre.url);
+                else { 
+                    Genre.create(genre);
+                    console.log('>>>>>>> Genre successfully created!')
+                    if (err) {
+                        console.log(err);
+                        return next(err);
+                    }
+                }
+            })
+        }
+    }
+]
 
 // Handle Genre delete on POST.
 exports.genre_delete_post = function(req, res) {
     res.send('NOT IMPLEMENTED: Genre delete POST');
-};
-
-// Display Genre update form on GET.
-exports.genre_update_get = function(req, res) {
-    res.send('NOT IMPLEMENTED: Genre update GET');
 };
 
 // Handle Genre update on POST.

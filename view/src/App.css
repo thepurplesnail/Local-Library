@@ -47,3 +47,20 @@ ul.total-list{
   margin-left: 18vw;
   margin-top: -35vh;
 }
+
+form{
+  margin-top: 1.5rem;
+}
+
+.label {
+  height: 1.5rem;
+}
+
+input {
+  width: 60vw;
+  margin-top: 1.5rem;
+}
+
+.submit-btn {
+  margin-top: .5rem;
+}
