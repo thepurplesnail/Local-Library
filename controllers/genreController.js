@@ -2,7 +2,7 @@ var Genre = require('../models/genre')
 var Book = require('../models/book')
 var async = require('async')
 const sequelize = require('../database')
-const { body, validationResult, check} = require("express-validator")
+const {validationResult, check} = require("express-validator")
 const req = require('express/lib/request')
 
 const synchronize = async () => {
