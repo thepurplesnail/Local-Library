@@ -2,7 +2,8 @@ var Genre = require('../models/genre')
 var Book = require('../models/book')
 var async = require('async')
 const sequelize = require('../database')
-const { body, validationResult, check } = require("express-validator")
+const { body, validationResult, check} = require("express-validator")
+const req = require('express/lib/request')
 
 const synchronize = async () => {
     await Genre.sync();
@@ -33,26 +34,32 @@ exports.genre_detail = function(req, res) {
 // GET /catalog/genre/create
 exports.genre_create_post = [
 
-    body('name', 'Genre name required!').trim().isLength({ min: 1 }).escape(),
-    
+    check('name', 'Genre name required!').trim().isLength({ min: 1 }).escape(),
+
+    check('name').custom(val => {return Genre.findOne({where: {'name': val}})
+    .then(genre => {if (genre) return Promise.reject('Genre already exists!')})}).escape(),
+
     (req, res, next) => {
         
         // Extract the validation errors from a request.
         const errors = validationResult(req);
 
         // Create a genre object with escaped and trimmed data.
-        var genre = { name: req.body.name }
+        var genre = { name: req.body.name };
 
         if (!errors.isEmpty()) {
             // There are errors. Render the form again with sanitized values/error messages.
-            res.json(errors);
+            res.send(errors);
         }
 
         else {
+            Genre.create(genre); 
+            res.json('Genre successfully created!');
+        }
+        /* {
             Genre.findOne({where: {'name': req.body.name}})
             .then((err, found_genre) => {
                 if (err) return next(err);
-                // genre exists so redirect to details page
                 if (found_genre) next(err);
                 else { 
                     Genre.create(genre);
@@ -61,11 +68,11 @@ exports.genre_create_post = [
                         console.log(err);
                         return next(err);
                     }
-                }
-            })
-        }
+                } 
+            }) 
+        } */
     }
-]
+];
 
 // Handle Genre delete on POST.
 exports.genre_delete_post = function(req, res) {
