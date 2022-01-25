@@ -4,7 +4,6 @@ import axios from 'axios'
 
 export default function CreateGenre(){
     const[post, setPost] = useState('');
-    const[msg, setMsg] = useState(null);
 
     let handleChange = (e) => {
         setPost(e.target.value);
