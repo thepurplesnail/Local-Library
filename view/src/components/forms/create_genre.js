@@ -9,13 +9,22 @@ export default function CreateGenre(){
     let handleChange = (e) => {
         setText(e.target.value);
     }
-    let handleSubmit = (e) => {
-        e.preventDefault();
-        setPost(text);
-        setText('');
-        axios.post('http://localhost:5000/catalog/genre/create', {name: post})
-        .then(res => setPost(res.data));
-        
+    let handleSubmit = async (e) => {
+        try{
+            e.preventDefault();
+            if (!text.length) {
+                alert('Genre name is required!'); 
+                return;
+            }
+            setPost(text);
+            setText('');
+            await axios.post('http://localhost:5000/catalog/genre/create', {name: post});
+            alert('Genre has been added!');
+        } catch(err) {
+            alert('Genre already exists!');
+            console.log(err);
+            return;
+        }
     }
 
     return(

@@ -2,7 +2,7 @@ var Genre = require('../models/genre')
 var Book = require('../models/book')
 var async = require('async')
 const sequelize = require('../database')
-const { body,validationResult } = require("express-validator")
+const { body, validationResult, check } = require("express-validator")
 
 const synchronize = async () => {
     await Genre.sync();
@@ -32,10 +32,11 @@ exports.genre_detail = function(req, res) {
 // Handle Genre create on POST.
 // GET /catalog/genre/create
 exports.genre_create_post = [
-    // validate and sanitize entry
+
     body('name', 'Genre name required!').trim().isLength({ min: 1 }).escape(),
     
     (req, res, next) => {
+        
         // Extract the validation errors from a request.
         const errors = validationResult(req);
 
@@ -52,7 +53,7 @@ exports.genre_create_post = [
             .then((err, found_genre) => {
                 if (err) return next(err);
                 // genre exists so redirect to details page
-                if (found_genre) res.redirect(found_genre.url);
+                if (found_genre) next(err);
                 else { 
                     Genre.create(genre);
                     console.log('>>>>>>> Genre successfully created!')
