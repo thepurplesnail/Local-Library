@@ -3,18 +3,20 @@ import {useState} from 'react'
 import axios from 'axios'
 
 export default function CreateGenre(){
-    const[text, setText] = useState('');
-    const[post, setPost] = useState(null);
+    const[post, setPost] = useState('');
+    const[msg, setMsg] = useState(null);
 
     let handleChange = (e) => {
-        setText(e.target.value);
+        setPost(e.target.value);
     }
     let handleSubmit = async (e) => {
         e.preventDefault();
-        setPost(text);
-        setText('');
         axios.post('http://localhost:5000/catalog/genre/create', {name: post})
-        .then(res => setTimeout(() => console.log(res), 1000));
+        .then(res => {
+            if (res.data.errors) alert(res.data.errors[0].msg);
+            else alert(res.data);
+        });
+        setPost('');
     }
 
     return(
@@ -29,7 +31,7 @@ export default function CreateGenre(){
                         </label>
                     </div>
                     <div className='input'>
-                        <input className = 'form-text' onChange = {handleChange} placeholder='Enter genre here' value = {text}/>
+                        <input className = 'form-text' onChange = {handleChange} placeholder='Enter genre here' value = {post}/>
                     </div>
                     <div className = 'submit-btn'>
                         <button type = 'Submit' className = 'btn' style = {{backgroundColor: 'mediumslateblue', color: 'white'}}>Submit</button>

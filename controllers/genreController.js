@@ -54,7 +54,7 @@ exports.genre_create_post = [
 
         else {
             Genre.create(genre); 
-            res.json('Genre successfully created!');
+            res.json(`Genre: ${genre.name} successfully created!`);
         }
         /* {
             Genre.findOne({where: {'name': req.body.name}})
