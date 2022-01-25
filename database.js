@@ -1,7 +1,7 @@
 // connect to Sequelize ORM
 const { Sequelize } = require('sequelize');
 
-const sequelize = new Sequelize('locallib', 'root', 'WatermelonCandy14#', {
+const sequelize = new Sequelize('locallib', 'root', '123', {
   host: 'localhost',
   dialect: 'mysql'
 });
