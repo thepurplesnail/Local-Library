@@ -30,7 +30,7 @@ export default function CreateGenre(){
                         </label>
                     </div>
                     <div className='input'>
-                        <input className = 'form-text' onChange = {handleChange} placeholder='Enter genre here' value = {post}/>
+                        <input className = 'form-text text-dark' onChange = {handleChange} placeholder='Enter genre here' value = {post}/>
                     </div>
                     <div className = 'submit-btn'>
                         <button type = 'Submit' className = 'btn' style = {{backgroundColor: 'mediumslateblue', color: 'white'}}>Submit</button>
