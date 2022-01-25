@@ -56,21 +56,6 @@ exports.genre_create_post = [
             Genre.create(genre); 
             res.json(`Genre: ${genre.name} successfully created!`);
         }
-        /* {
-            Genre.findOne({where: {'name': req.body.name}})
-            .then((err, found_genre) => {
-                if (err) return next(err);
-                if (found_genre) next(err);
-                else { 
-                    Genre.create(genre);
-                    console.log('>>>>>>> Genre successfully created!')
-                    if (err) {
-                        console.log(err);
-                        return next(err);
-                    }
-                } 
-            }) 
-        } */
     }
 ];
 
