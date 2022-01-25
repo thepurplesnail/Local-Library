@@ -48,7 +48,6 @@ exports.genre_create_post = [
         var genre = { name: req.body.name };
 
         if (!errors.isEmpty()) {
-            // There are errors. Render the form again with sanitized values/error messages.
             res.send(errors);
         }
 
