@@ -1,0 +1,30 @@
+form{
+    margin-top: 1.5rem;
+  }
+  
+.label {
+    height: 1.5rem;
+}
+
+input {
+    width: 60vw;
+    margin-top: 1.5rem;
+}
+
+.submit-btn {
+    margin-top: .5rem;
+}
+
+button:hover {
+    cursor: pointer;
+}
+
+.checkboxes-ctnr {
+    width: 60vw;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.checkboxes-ctnr > div {
+    margin-right: 1vw;
+}
