@@ -2,6 +2,8 @@ import Btn from '../icons/btn'
 import axios from 'axios'
 import {useState, useEffect} from 'react'
 import './forms.css'
+import DropdownButton from 'react-bootstrap/DropdownButton'
+import Dropdown from 'react-bootstrap/Dropdown'
 
 export default function CreateBook(){
     //getting genres
@@ -13,24 +15,34 @@ export default function CreateBook(){
         return () => isMounted = false;
     }, [genres])
 
+    //getting authors
+    const [authors, setAuthors] = useState(null);
+    useEffect(() => {
+        let isMounted = true;
+        axios.get('http://localhost:5000/catalog/authors')
+        .then(res => {if (isMounted) setAuthors(res.data)});
+        return () => isMounted = false;
+    }, [authors]);
+
     const [title, setTitle] = useState('');
     const [summary, setSummary] = useState('');
     const [author, setAuthor] = useState('');
     const [isbn, setIsbn] = useState('');
-    const [genre, setGenre] = useState(null);
-    const [genreList, setGenreList] = useState([]);
+    const [genreId, setGenreId] = useState(null);
+    const [genreIdList, setGenreIdList] = useState([]);
 
     let handleGenre = e => {
         if (e.currentTarget.checked){
-            setGenre(e.target.value);
-            if (genre){
-                setGenreList(genreList.concat(genre));
-                console.log('genre: ' + genre);
-                console.log('genre[]: ' + genreList);
-                console.log(e.currentTarget.checked);}
+            setGenreId(e.target.value);
+            if (genreId){
+                setGenreIdList(genreIdList.concat(genreId));
+                //console.log('genre: ' + genreId);
+                //console.log('genre[]: ' + genreIdList);
+                //console.log(e.currentTarget.checked);
+            }
         } else {
-            setGenreList(genreList.filter(genreObj => genreObj !== e.target.value));
-            console.log('genre[]: ' + genreList);
+            setGenreIdList(genreIdList.filter(genreId => genreId !== e.target.value));
+            //console.log('genre[]: ' + genreIdList);
         }
     }
 
@@ -44,17 +56,23 @@ export default function CreateBook(){
                 <form>
                     <label className = 'label'><strong>Title:</strong></label>
                     <div>
-                        <input className = 'form-text text-dark' onChange = {e => {setTitle(e.target.value); console.log(title);}} placeholder = 'Title goes here'/>
+                        <input className = 'form-text text-dark' onChange = {e => {setTitle(e.target.value)}} placeholder = 'Title goes here'/>
                     </div>
 
                     <label className = 'label'><strong>Author:</strong></label>
                     <div>
-                        <input className = 'form-text text-dark' onChange = {e => setAuthor(e.target.value)} placeholder = 'Author name goes here'/>
+                        <DropdownButton id="dropdown-item-button" title = {author ? author.full_name : '--Select author--'}>
+                            {authors.map(author => 
+                                <div onClick = {() => setAuthor(author)} key = {author.id}>
+                                    <Dropdown.Item>{author.full_name}</Dropdown.Item>
+                                </div>
+                            )}
+                        </DropdownButton>                        
                     </div>
 
                     <label className = 'label'><strong>Summary:</strong></label>
                     <div>
-                        <input className = 'form-text text-dark' onChange = {e => setSummary(e.target.value)} placeholder = 'Summary goes here'/>
+                        <textarea className = 'form-text text-dark' onChange = {e => setSummary(e.target.value)} style = {{height: '10vh', width: '60vw'}} placeholder = 'Summary goes here'/>
                     </div>
 
                     <label className = 'label'><strong>ISBN:</strong></label>
@@ -64,11 +82,11 @@ export default function CreateBook(){
 
                     <label className = 'label'><strong>Genres:</strong></label>
                     <div className = 'checkboxes-ctnr'>
-                        {genres.map(obj => 
-                            <div className="form-check" key = {obj.id}>
-                                <input className="form-check-input" type="checkbox" value = {obj.name} onChange = {handleGenre} id="flexCheckDefault"/>
+                        {genres.map(genre => 
+                            <div className="form-check" key = {genre.id}>
+                                <input className="form-check-input" type="checkbox" value = {genre.id} onChange = {handleGenre} id="flexCheckDefault"/>
                                 <label className="form-check-label">
-                                    {obj.name}
+                                    {genre.name}
                                 </label>
                             </div>
                         )}

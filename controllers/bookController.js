@@ -116,7 +116,8 @@ exports.book_create_post = [
         else { 
             let book = Book.create(bookDetails).catch(console.log);
             if (req.body.genres) 
-                for (let g of req.body.genres) book.addGenres(g);
+                for (let gId of req.body.genreIds) 
+                    book.addGenres(Genre.findByPk(gId));
             console.log(`>>>>> Book: ${bookDetails.title} successfully added!`); 
         }
     }
