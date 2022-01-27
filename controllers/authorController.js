@@ -16,14 +16,15 @@ Promise.resolve().then(synchronize());
 // GET /catalog/authors
 exports.author_list = function(req, res) {
     Author.findAll().then(result => 
-        setTimeout(res.json(result), 500))
+        setTimeout(() => res.json(result), 500));
 };
 
 // Display detail page for a specific Author.
 // GET /catalog/author/:id
 exports.author_detail = function(req, res) {
     Author.findByPk(req.params.id, {include: {model: Book, as: 'books'}})
-    .then(results => res.json(results));
+    .then(results => 
+        setTimeout(() => res.json(results), 500));
 };
 
 // Handle Author create on POST.
