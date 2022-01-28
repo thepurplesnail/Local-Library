@@ -28,11 +28,7 @@ export default function CreateBook(){
     const [summary, setSummary] = useState('');
     const [author, setAuthor] = useState('');
     const [isbn, setIsbn] = useState('');
-    const [genreId, setGenreId] = useState(null);
     const [genreIdList, setGenreIdList] = useState([]);
-
-    // controls the checked state of the genre checkboxes
-    const[check, setCheck] = useState('flexCheckDefault'); 
 
     // adds/removes genreId from genreIdList when box is checked/unchecked
     let handleGenre = e => {
