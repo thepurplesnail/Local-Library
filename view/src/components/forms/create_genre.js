@@ -27,7 +27,7 @@ export default function CreateGenre(){
                 <form onSubmit = {handleSubmit}>
                     <div className = 'label'>
                         <label className = 'form-label'>
-                            <strong>Genre:</strong>
+                            Genre:
                         </label>
                     </div>
                     <div className='input'>
