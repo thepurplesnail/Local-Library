@@ -37,16 +37,16 @@ export default function CreateBook(){
     // adds/removes genreId from genreIdList when box is checked/unchecked
     let handleGenre = e => {
         if (e.currentTarget.checked){
-            setGenreId(e.target.value);
-            if (genreId){
-                setGenreIdList(genreIdList.concat(genreId));
-                //console.log('genre: ' + genreId);
-                //console.log('genre[]: ' + genreIdList);
-                //console.log(e.currentTarget.checked);
+            //setGenreId(e.currentTarget.value);
+            if (e.currentTarget.value){
+                setGenreIdList(genreIdList.concat(e.currentTarget.value));
+                console.log('genre: ' + e.currentTarget.value);
+                console.log('genre[]: ' + genreIdList);
+                console.log(e.currentTarget.checked);
             }
         } else {
-            setGenreIdList(genreIdList.filter(genreId => genreId !== e.target.value));
-            //console.log('genre[]: ' + genreIdList);
+            setGenreIdList(genreIdList.filter(genreId => genreId !== e.currentTarget.value));
+            console.log('genre[]: ' + genreIdList);
         }
     }
 
@@ -69,7 +69,7 @@ export default function CreateBook(){
         setSummary('');
         setAuthor(null);
         setIsbn('');
-        setGenreIdList('');
+        setGenreIdList([]);
         setCheck('flexCheckDefault');
     }
 

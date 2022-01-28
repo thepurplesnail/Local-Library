@@ -96,14 +96,6 @@ exports.book_create_post = [
 
     check('author.full_name').trim()
         .isLength({min: 1}).withMessage('Author name is required!').escape(),
-
-    check('title').custom(val  => 
-        {return Book.findOne({where: {'title': val}})
-        .then(val => 
-            {if (val) return Promise.reject('Book already exists :(').catch(console.log)}
-            )
-        }
-    ), 
     async (req, res) => {
         
         const err = validationResult(req);
@@ -115,11 +107,14 @@ exports.book_create_post = [
         };
         if (!err.isEmpty()) res.json(err);
         else { 
-            console.log('*****************AUTHOR INFO: ' + req.body.author.id);
-            let book = Book.create(bookDetails).catch(console.log);
-            if (req.body.genres) 
-                for (let gId of req.body.genreIdList) 
-                    book.addGenres(Genre.findByPk(gId));
+            let book = await Book.create(bookDetails).catch(console.log);
+            console.log('******************************** Genre Id list: ' + req.body.genreIdList);
+
+            if (req.body.genreIdList) 
+                for (let gId of req.body.genreIdList){ 
+                    console.log('***********************ID: ' + gId);
+                    Genre.findByPk(gId).then(genre => book.addGenres(genre)).catch(console.log);
+                }
             console.log(`>>>>> Book: ${bookDetails.title} successfully added!`); 
             res.json('Book successfully created!');
         }
