@@ -28,6 +28,7 @@ exports.author_detail = function(req, res) {
 };
 
 // Handle Author create on POST.
+// POST /catalog/author/create
 exports.author_create_post = [
     // Validate and sanitize fields.
     check('first_name').trim().isLength({ min: 1 }).escape().withMessage('First name must be specified.')
