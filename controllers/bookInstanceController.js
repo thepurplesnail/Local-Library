@@ -2,6 +2,7 @@ var BookInstance = require('../models/bookinstance')
 var Book = require('../models/book')
 const sequelize = require('../database')
 var async = require('async')
+var {check, validationResult} = require('express-validator')
 
 Promise.resolve().then(sequelize.auth())
 
@@ -32,29 +33,34 @@ exports.bookinstance_detail = function(req, res) {
     .then(result => res.json(result));
 };
 
-// Display BookInstance create form on GET.
-exports.bookinstance_create_get = function(req, res) {
-    res.send('NOT IMPLEMENTED: BookInstance create GET');
-};
-
 // Handle BookInstance create on POST.
-exports.bookinstance_create_post = function(req, res) {
-    res.send('NOT IMPLEMENTED: BookInstance create POST');
-};
-
-// Display BookInstance delete form on GET.
-exports.bookinstance_delete_get = function(req, res) {
-    res.send('NOT IMPLEMENTED: BookInstance delete GET');
-};
+// POST /catalog/bookinstance/create
+exports.bookinstance_create_post = [
+        // validate and sanitize fields
+    check('bk.title', 'Book is required!').trim().isLength({min: 1}),
+    check('imprint', 'Imprint is required!').trim().isLength({min: 1}),
+    check('due_back', 'Invalid date!').optional({checkFalsy: true}).isISO8601().escape(),
+    check('status', 'Status is required!').isLength({min: 1}),
+    async (req, res) => {
+        const errors = validationResult(req);
+        let bkInstDtls = {
+            bookId: req.body.bk.id,
+            imprint: req.body.imprint,
+            due_back: (req.body.due_back ? req.body.due_back : undefined),
+            status: req.body.status
+        }
+        if (!errors.isEmpty()) res.json(errors);
+        else {
+            await BookInstance.create(bkInstDtls).catch(console.log);
+            console.log(`>>>>>>>>>>>>>>>> Book copy ${req.body.bk.title} successfully created!`);
+            res.json(`New copy for ${req.body.bk.title} has been added!`);
+        }
+    }
+];
 
 // Handle BookInstance delete on POST.
 exports.bookinstance_delete_post = function(req, res) {
     res.send('NOT IMPLEMENTED: BookInstance delete POST');
-};
-
-// Display BookInstance update form on GET.
-exports.bookinstance_update_get = function(req, res) {
-    res.send('NOT IMPLEMENTED: BookInstance update GET');
 };
 
 // Handle bookinstance update on POST.
