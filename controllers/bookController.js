@@ -85,6 +85,7 @@ exports.book_detail = function(req, res) {
 };
 
 // Handle book create on POST.
+// GET /catalog/book/create
 exports.book_create_post = [
     check('title', 'Title is requiried!').trim().isLength({min: 1}).escape(),
 
@@ -93,7 +94,7 @@ exports.book_create_post = [
 
     check('isbn', 'ISBN is required!').trim().isLength({min: 1}).escape(),
 
-    check('author').trim()
+    check('author.full_name').trim()
         .isLength({min: 1}).withMessage('Author name is required!').escape(),
 
     check('title').custom(val  => 
@@ -114,11 +115,13 @@ exports.book_create_post = [
         };
         if (!err.isEmpty()) res.json(err);
         else { 
+            console.log('*****************AUTHOR INFO: ' + req.body.author.id);
             let book = Book.create(bookDetails).catch(console.log);
             if (req.body.genres) 
-                for (let gId of req.body.genreIds) 
+                for (let gId of req.body.genreIdList) 
                     book.addGenres(Genre.findByPk(gId));
             console.log(`>>>>> Book: ${bookDetails.title} successfully added!`); 
+            res.json('Book successfully created!');
         }
     }
 ];

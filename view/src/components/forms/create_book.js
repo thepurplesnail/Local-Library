@@ -6,7 +6,7 @@ import DropdownButton from 'react-bootstrap/DropdownButton'
 import Dropdown from 'react-bootstrap/Dropdown'
 
 export default function CreateBook(){
-    //getting genres
+    //GET all genres
     const [genres, setGenres] = useState(null);
     useEffect(() => {
         let isMounted = true;
@@ -15,7 +15,7 @@ export default function CreateBook(){
         return () => isMounted = false;
     }, [genres])
 
-    //getting authors
+    //GET all authors
     const [authors, setAuthors] = useState(null);
     useEffect(() => {
         let isMounted = true;
@@ -31,6 +31,10 @@ export default function CreateBook(){
     const [genreId, setGenreId] = useState(null);
     const [genreIdList, setGenreIdList] = useState([]);
 
+    // controls the checked state of the genre checkboxes
+    const[check, setCheck] = useState('flexCheckDefault'); 
+
+    // adds/removes genreId from genreIdList when box is checked/unchecked
     let handleGenre = e => {
         if (e.currentTarget.checked){
             setGenreId(e.target.value);
@@ -46,6 +50,29 @@ export default function CreateBook(){
         }
     }
 
+    // make POST request
+    let handleSubmit = e => {
+        e.preventDefault();
+        axios.post('http://localhost:5000/catalog/book/create', {
+            title: title,
+            summary: summary,
+            author: author,
+            isbn: isbn,
+            genreIdList: genreIdList
+        })
+        .then(res => {
+            if (res.data.errors) alert(res.data.errors[0].msg);
+            else alert(res.data);
+            }
+        );
+        setTitle('');
+        setSummary('');
+        setAuthor(null);
+        setIsbn('');
+        setGenreIdList('');
+        setCheck('flexCheckDefault');
+    }
+
     if (!genres) return <div className = 'btn-pg-container'>Nothing to see here :(</div>
 
     return(
@@ -53,10 +80,10 @@ export default function CreateBook(){
             <div className = 'btn'><Btn url = '/catalog'/></div>
             <div>
                 <h1>Create book</h1>
-                <form>
+                <form onSubmit = {handleSubmit}>
                     <label className = 'label'><strong>Title:</strong></label>
                     <div>
-                        <input className = 'form-text text-dark' onChange = {e => {setTitle(e.target.value)}} placeholder = 'Title goes here'/>
+                        <input className = 'form-text text-dark' onChange = {e => {setTitle(e.target.value)}} placeholder = 'Title goes here' value = {title}/>
                     </div>
 
                     <label className = 'label'><strong>Author:</strong></label>
@@ -72,19 +99,19 @@ export default function CreateBook(){
 
                     <label className = 'label'><strong>Summary:</strong></label>
                     <div>
-                        <textarea className = 'form-text text-dark' onChange = {e => setSummary(e.target.value)} style = {{height: '10vh', width: '60vw'}} placeholder = 'Summary goes here'/>
+                        <textarea className = 'form-text text-dark' onChange = {e => setSummary(e.target.value)} style = {{height: '10vh', width: '60vw'}} value = {summary} placeholder = 'Summary goes here'/>
                     </div>
 
                     <label className = 'label'><strong>ISBN:</strong></label>
                     <div>
-                        <input className = 'form-text text-dark' onChange = {e => setIsbn(e.target.value)} placeholder = 'ISBN goes here'/>
+                        <input className = 'form-text text-dark' onChange = {e => setIsbn(e.target.value)} placeholder = 'ISBN goes here' value = {isbn}/>
                     </div>
 
                     <label className = 'label'><strong>Genres:</strong></label>
                     <div className = 'checkboxes-ctnr'>
                         {genres.map(genre => 
                             <div className="form-check" key = {genre.id}>
-                                <input className="form-check-input" type="checkbox" value = {genre.id} onChange = {handleGenre} id="flexCheckDefault"/>
+                                <input className="form-check-input" type="checkbox" value = {genre.id} onChange = {handleGenre} id='flexCheckDefault'/>
                                 <label className="form-check-label">
                                     {genre.name}
                                 </label>
