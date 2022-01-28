@@ -66,7 +66,6 @@ export default function CreateBook(){
         setAuthor(null);
         setIsbn('');
         setGenreIdList([]);
-        setCheck('flexCheckDefault');
     }
 
     if (!genres) return <div className = 'btn-pg-container'>Nothing to see here :(</div>
