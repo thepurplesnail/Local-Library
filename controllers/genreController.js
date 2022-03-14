@@ -22,7 +22,6 @@ exports.genre_list = function(req, res) {
 // Display detail page for a specific Genre.
 // GET /catalog/genre/:id
 exports.genre_detail = function(req, res) {
-    //res.send('NOT IMPLEMENTED: Genre detail: ' + req.params.id);
     Genre.findByPk(req.params.id, {include: {model: Book, as: 'books'}})
     .then(result => 
         setTimeout(() => 
@@ -34,10 +33,10 @@ exports.genre_detail = function(req, res) {
 // GET /catalog/genre/create
 exports.genre_create_post = [
 
-    check('name', 'Genre name required!').trim().isLength({ min: 1 }).escape(),
+    check('name', 'Genre name required!').trim().isLength({ min: 1 }).escape(), // genre name is required
 
-    check('name').custom(val => {return Genre.findOne({where: {'name': val}})
-    .then(genre => {if (genre) return Promise.reject('Genre already exists!')})}).escape(),
+    check('name').custom(val => {return Genre.findOne({where: {'name': val}}) 
+    .then(genre => {if (genre) return Promise.reject('Genre already exists!')})}).escape(), // check new genre is unique
 
     (req, res, next) => {
         
@@ -47,10 +46,12 @@ exports.genre_create_post = [
         // Create a genre object with escaped and trimmed data.
         var genre = { name: req.body.name };
 
+        // send any errors
         if (!errors.isEmpty()) {
             res.send(errors);
         }
 
+        // otherwise create genre and send success msg
         else {
             Genre.create(genre); 
             res.json(`Genre: ${genre.name} successfully created!`);
