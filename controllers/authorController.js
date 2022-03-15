@@ -58,7 +58,7 @@ exports.author_create_post = [
     
 ];
 
-// Handle Author delete on POST.
+// Handle Author delete on DELETE.
 // DELETE /catalog/author/:id/delete
 exports.author_delete_post = async function(req, res, next) {
     try{

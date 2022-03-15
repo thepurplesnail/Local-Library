@@ -14,7 +14,9 @@ export default function DeleteAuthor(){
     })
 
     const handleClick = e => {
-        
+        e.preventDefault();
+        axios.delete(`http://localhost:5000/catalog/author/${authorId.id}/delete`)
+        .then(res => alert(res.data));
     }
 
     if (!post) return (<div className = 'btn-pg-container'>nothing to see here :( (Give it a few seconds!)</div>)
