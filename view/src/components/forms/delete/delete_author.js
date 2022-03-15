@@ -1,10 +1,11 @@
 import axios from "axios";
-import {Link, useParams} from 'react-router-dom'
+import {Link, useParams, useNavigate} from 'react-router-dom'
 import {useState, useEffect} from "react";
 import Btn from "../../icons/btn"
 
 export default function DeleteAuthor(){
-    const [post, setPost] = useState(null)
+    const [post, setPost] = useState(null);
+    let navigate = useNavigate();
     let authorId = useParams();
     useEffect(() => {
         let isMounted = true;
@@ -17,6 +18,7 @@ export default function DeleteAuthor(){
         e.preventDefault();
         axios.delete(`http://localhost:5000/catalog/author/${authorId.id}/delete`)
         .then(res => alert(res.data));
+        navigate('/catalog/authors');
     }
 
     if (!post) return (<div className = 'btn-pg-container'>nothing to see here :( (Give it a few seconds!)</div>)
