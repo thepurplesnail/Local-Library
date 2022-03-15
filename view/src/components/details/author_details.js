@@ -34,7 +34,7 @@ export default function AuthorDetails (){
                     )}
                 </div>
                 <hr/>
-                <Link to = {`/catalog/author/${authorId.id}/delete`} className = "text-decoration-none">Delete author</Link>
+                <Link to = {`delete`} className = "text-decoration-none">Delete author</Link>
             </div>
         </div>
     );

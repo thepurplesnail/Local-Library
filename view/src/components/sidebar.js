@@ -14,6 +14,7 @@ import AuthorDetails from './details/author_details'
 import BookInstanceDetails from './details/bookinstance_details'
 import DeleteAuthor from './forms/delete/delete_author'
 import {useState} from 'react'
+import DeleteBookInstance from "./forms/delete/delete_book_instance"
 
 export default function Sidebar() {
     return (
@@ -46,9 +47,8 @@ export default function Sidebar() {
           <Route path = '/genre/:id' element = {<GenreDetails/>}/>
           <Route path = '/author/:id' element = {<AuthorDetails/>}/>
           <Route path = '/bookinstance/:id' element = {<BookInstanceDetails/>}/>
-          <Route path = '/author/:id/delete' element = {<DeleteAuthor/>}>
-            {}
-          </Route>
+          <Route path = '/author/:id/delete' element = {<DeleteAuthor/>}/>
+          <Route path = '/bookinstance/:id/delete' element = {<DeleteBookInstance/>}/>
           <Route path="*" element={<main style={{ padding: "1rem" }}> <p>There's nothing here!</p> </main>} />
         </Routes>
       </div>

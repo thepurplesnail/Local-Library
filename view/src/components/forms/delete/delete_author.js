@@ -48,7 +48,7 @@ export default function DeleteAuthor(){
             <div className = 'btn'><Btn url = {`/catalog/author/${authorId.id}`}/></div>
             <div className="pg">
                 <h1>Author: {post.family_name}, {post.first_name}</h1>
-                <p>Do you really want to delete this Author?</p>
+                <p>Do you really want to delete this author?</p>
                 <div className = 'submit-btn' onClick = {handleClick}>
                     <button type = 'Submit' className = 'btn' style = {{backgroundColor: 'mediumslateblue', color: 'white'}}>Delete</button>
                 </div>
