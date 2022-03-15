@@ -25,6 +25,8 @@ export default function BookInstanceDetails(){
                 <p><strong>Imprint:</strong> {post.imprint}</p>
                 <p><strong>Status:</strong> <Status stat = {post.status} /></p>
                 <p><strong>Due Back:</strong> {post.due_back_formatted}</p>
+                <hr/>
+                <Link to = 'delete' className = "text-decoration-none">Delete book instance</Link>
             </div>
         </div>
     );

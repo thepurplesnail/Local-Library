@@ -58,9 +58,16 @@ exports.bookinstance_create_post = [
     }
 ];
 
-// Handle BookInstance delete on POST.
-exports.bookinstance_delete_post = function(req, res) {
-    res.send('NOT IMPLEMENTED: BookInstance delete POST');
+// Handle BookInstance delete on DELETE
+// DELETE /catalog/bookinstance/:id/delete
+exports.bookinstance_delete_post = async function(req, res) {
+    try{
+        await (await BookInstance.findByPk(req.params.id)).destroy();
+        res.json('Book instance successfully deleted!');
+    } catch (err){
+        console.log('>>>>>>>>>>> ERROR DELETING BOOK INSTANCE: ' + err)
+        res.json(err)
+    }
 };
 
 // Handle bookinstance update on POST.
