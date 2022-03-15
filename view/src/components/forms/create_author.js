@@ -72,7 +72,7 @@ export default function CreateAuthor(){
 
 
                     <div className = 'submit-btn'>
-                            <button type = 'Submit' className = 'btn' style = {{backgroundColor: 'mediumslateblue', color: 'white'}}>Submit</button>
+                        <button type = 'Submit' className = 'btn' style = {{backgroundColor: 'mediumslateblue', color: 'white'}}>Submit</button>
                     </div>
                 </form>
             </div>

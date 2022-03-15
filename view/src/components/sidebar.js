@@ -12,6 +12,7 @@ import BookDetails from './details/book_details'
 import GenreDetails from './details/genre_details'
 import AuthorDetails from './details/author_details'
 import BookInstanceDetails from './details/bookinstance_details'
+import DeleteAuthor from './forms/delete/delete_author'
 
 export default function Sidebar() {
     return (
@@ -44,6 +45,7 @@ export default function Sidebar() {
           <Route path = '/genre/:id' element = {<GenreDetails/>}/>
           <Route path = '/author/:id' element = {<AuthorDetails/>}/>
           <Route path = '/bookinstance/:id' element = {<BookInstanceDetails/>}/>
+          <Route path = '/author/:id/delete' element = {<DeleteAuthor/>}/>
           <Route path="*" element={<main style={{ padding: "1rem" }}> <p>There's nothing here!</p> </main>} />
         </Routes>
       </div>

@@ -31,12 +31,12 @@ exports.author_detail = function(req, res) {
 // POST /catalog/author/create
 exports.author_create_post = [
     // Validate and sanitize fields.
-    check('first_name').trim().isLength({ min: 1 }).escape().withMessage('First name must be specified.')
+    check('first_name').trim().isLength({ min: 1 }).escape().withMessage('First name must be specified.') // author first name mandatory
     .isAlphanumeric().withMessage('First name has non-alphanumeric characters.'),
-    check('family_name').trim().isLength({ min: 1 }).escape().withMessage('Family name must be specified.')
+    check('family_name').trim().isLength({ min: 1 }).escape().withMessage('Family name must be specified.') // author family name mandatory
         .isAlphanumeric().withMessage('Family name has non-alphanumeric characters.'),
-    check('date_of_birth', 'Invalid date of birth').optional({checkFalsy: true}).isISO8601().toDate().escape(),
-    check('date_of_death', 'Invalid date of death').optional({checkFalsy: true}).isISO8601().toDate().escape(),
+    check('date_of_birth', 'Invalid date of birth').optional({checkFalsy: true}).isISO8601().toDate().escape(), // check DOB matches yyyy-mm-dd
+    check('date_of_death', 'Invalid date of death').optional({checkFalsy: true}).isISO8601().toDate().escape(), // check DOD matches yyy-mm--dd
     
     (req, res) => {
         
@@ -58,14 +58,16 @@ exports.author_create_post = [
     
 ];
 
-// Display Author delete form on GET.
-exports.author_delete_get = function(req, res) {
-    res.send('NOT IMPLEMENTED: Author delete GET');
-};
-
 // Handle Author delete on POST.
-exports.author_delete_post = function(req, res) {
-    res.send('NOT IMPLEMENTED: Author delete POST');
+// DELETE /catalog/author/:id/delete
+exports.author_delete_post = async function(req, res, next) {
+    try{
+        await (await Author.findByPk(req.params.id)).destroy();
+        res.json('Author successfully deleted!')
+    } catch (err){
+        console.log('>>>>>>>>>>> ERROR DELETING AUTHOR: ' + err)
+        res.json(err)
+    }
 };
 
 // Display Author update form on GET.

@@ -66,7 +66,7 @@ export default function CreateBookInstance(){
 
                     <label className = 'label'>Date when book available:</label>
                     <div>
-                        <input className = 'form-text text-dark' placeholder = 'yyyy-mmm-dd' onChange = {e => setDue_Back(e.target.value)} value = {due_back}/>
+                        <input className = 'form-text text-dark' placeholder = 'yyyy-mm-dd' onChange = {e => setDue_Back(e.target.value)} value = {due_back}/>
                     </div>
 
 

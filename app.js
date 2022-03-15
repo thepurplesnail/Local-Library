@@ -6,7 +6,6 @@ var cors = require('cors');
 var bodyParser = require('body-parser');
 
 var indexRouter = require('./routes/index');
-var usersRouter = require('./routes/users');
 var catologRouter = require('./routes/catalog');
 
 
@@ -25,8 +24,6 @@ app.use(bodyParser.json());
 // routes
 
 app.use('/', indexRouter);
-app.use('/users', usersRouter);
-app.use('/users/hello', usersRouter);
 app.use('/catalog', catologRouter);
 
 module.exports = app;
