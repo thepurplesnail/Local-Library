@@ -40,7 +40,7 @@ export default function CreateAuthor(){
                 <h1>Create author</h1>
                 <form onSubmit={handleSubmit}>
                     <div className = 'label'>
-                        <label>First name:</label>
+                        <label>First name *</label>
                     </div>
                     <div>
                         <input className = 'form-text text-dark' onChange = {handleChangeFirst} placeholder = 'First name goes here' value = {first}/>
@@ -48,7 +48,7 @@ export default function CreateAuthor(){
 
 
                     <div className = 'label'>
-                        <label>Family name:</label>
+                        <label>Family name *</label>
                     </div>
                     <div>
                         <input className = 'form-text text-dark' onChange = {handleChangeLast} placeholder = 'Last name goes here' value = {last}/>

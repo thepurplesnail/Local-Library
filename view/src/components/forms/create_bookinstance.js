@@ -10,7 +10,7 @@ export default function CreateBookInstance(){
           [book, setBook] = useState(null),
           [status, setStatus] = useState(null),
           [imprint, setImprint] = useState(''),
-          [due_back, setDue_Back] = useState(null);
+          [due_back, setDue_Back] = useState(undefined);
     
     useEffect(()=> {
         let isMounted = true;
@@ -46,7 +46,7 @@ export default function CreateBookInstance(){
             <div>
                 <h1>Create book instance</h1>
                 <form onSubmit = {handleSubmit}>
-                    <label className = 'label'>Book *:</label>
+                    <label className = 'label'>Book *</label>
                     <div>
                         <DropdownButton id="dropdown-item-button" title = {book ? book.title : '--select book--'}>
                             {books.map(book => 
@@ -58,19 +58,19 @@ export default function CreateBookInstance(){
                     </div>
 
                     
-                    <label className = 'label'>Imprint *:</label>
+                    <label className = 'label'>Imprint *</label>
                     <div>
                         <input className = 'form-text text-dark' placeholder = 'Imprint' onChange = {e => setImprint(e.target.value)} value = {imprint}/>
                     </div>
 
 
-                    <label className = 'label'>Date when book available:</label>
+                    <label className = 'label'>Date when book available</label>
                     <div>
                         <input className = 'form-text text-dark' placeholder = 'yyyy-mm-dd' onChange = {e => setDue_Back(e.target.value)} value = {due_back}/>
                     </div>
 
 
-                    <label className = 'label'>Status *:</label>
+                    <label className = 'label'>Status *</label>
                     <div>
                         <DropdownButton id="dropdown-item-button" title = {status ? status : '--select status--'}>
                             <Dropdown.Item onClick = {() => setStatus('Available')}>Available</Dropdown.Item>

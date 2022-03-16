@@ -217,13 +217,8 @@ async.series([
 
 // Optional callback
 function(err, results) {
-    if (err) {
+    if (err) 
         console.log('FINAL ERR: '+ err);
-    }
-    else {
-        //console.log('BOOKInstances: '+ bookinstances);
-        
-    }
     // All done, disconnect from database
     sequelize.close();
     console.log("All done, disconnecting now!");
