@@ -49,8 +49,8 @@ router.get('/authors', author_controller.author_list);
 //POST request for creating Genre.
 router.post('/genre/create', genre_controller.genre_create_post);
 
-// POST request to delete Genre.
-router.post('/genre/:id/delete', genre_controller.genre_delete_post);
+// DELETE request to delete Genre.
+router.delete('/genre/:id/delete', genre_controller.genre_delete_post);
 
 // POST request to update Genre.
 router.post('/genre/:id/update', genre_controller.genre_update_post);

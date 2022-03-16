@@ -59,9 +59,16 @@ exports.genre_create_post = [
     }
 ];
 
-// Handle Genre delete on POST.
-exports.genre_delete_post = function(req, res) {
-    res.send('NOT IMPLEMENTED: Genre delete POST');
+// Handle Genre delete on DELETE.
+// DELETE /catalog/genre/:id/delete
+exports.genre_delete_post = async function(req, res) {
+    try{
+        (await Genre.findByPk(req.params.id)).destroy();
+        res.json('Genre successfully deleted!');
+    } catch (err){
+        console.log('>>>>>>>>>>> ERROR DELETING GENRE: ' + err)
+        res.json(err)
+    }
 };
 
 // Handle Genre update on POST.

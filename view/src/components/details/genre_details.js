@@ -36,6 +36,8 @@ export default function GenreDetails (){
                         </text>
                     )}
                 </div>
+                <hr/>
+                <Link to = 'delete' className = "text-decoration-none">Delete genre</Link>
             </div>
         </div>
     );
