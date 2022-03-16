@@ -66,7 +66,6 @@ exports.book_list = async function(req, res) {
 // Display detail page for a specific book.
 // GET /catalog/book/:id
 exports.book_detail = function(req, res) {
-    //res.send('NOT IMPLEMENTED: Book detail: ' + req.params.id);
     async.parallel({
         'book': callback => 
             Book.findByPk(req.params.id, {include: [
@@ -121,9 +120,16 @@ exports.book_create_post = [
     }
 ];
 
-// Handle book delete on POST.
-exports.book_delete_post = function(req, res) {
-    res.send('NOT IMPLEMENTED: Book delete POST');
+// Handle book delete on DELETE.
+// DELETE /catalog/book/:id/delete
+exports.book_delete_post = async function(req, res) {
+    try{
+        await (await Book.findByPk(req.params.id)).destroy();
+        res.json('Book successfully deleted!')
+    } catch (err){
+        console.log('>>>>>>>>>>> ERROR DELETING BOOK: ' + err)
+        res.json(err)
+    }
 };
 
 // Handle book update on POST.

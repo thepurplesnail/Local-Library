@@ -15,8 +15,8 @@ router.get('/', book_controller.index);
 // POST request for creating Book.
 router.post('/book/create', book_controller.book_create_post);
 
-// POST request to delete Book.
-router.post('/book/:id/delete', book_controller.book_delete_post);
+// DELETE request to delete Book.
+router.delete('/book/:id/delete', book_controller.book_delete_post);
 
 // POST request to update Book.
 router.post('/book/:id/update', book_controller.book_update_post);
@@ -66,7 +66,7 @@ router.get('/genres', genre_controller.genre_list);
 // POST request for creating BookInstance.
 router.post('/bookinstance/create', book_instance_controller.bookinstance_create_post);
 
-// POST request to delete BookInstance.
+// DELETE request to delete BookInstance.
 router.delete('/bookinstance/:id/delete', book_instance_controller.bookinstance_delete_post);
 
 // POST request to update BookInstance.

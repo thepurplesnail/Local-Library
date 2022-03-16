@@ -4,17 +4,20 @@ import Authors from './menus/authors'
 import Genres from './menus/genres'
 import BookInstances from './menus/bookinstances'
 import Welcome from './welcome'
+
 import CreateBook from './forms/create_book'
 import CreateAuthor from './forms/create_author'
 import CreateGenre from './forms/create_genre'
 import CreateBookInstance from './forms/create_bookinstance'
+
 import BookDetails from './details/book_details'
 import GenreDetails from './details/genre_details'
 import AuthorDetails from './details/author_details'
 import BookInstanceDetails from './details/bookinstance_details'
+
 import DeleteAuthor from './forms/delete/delete_author'
-import {useState} from 'react'
 import DeleteBookInstance from "./forms/delete/delete_book_instance"
+import DeleteBook from "./forms/delete/delete_book.js"
 
 export default function Sidebar() {
     return (
@@ -49,6 +52,7 @@ export default function Sidebar() {
           <Route path = '/bookinstance/:id' element = {<BookInstanceDetails/>}/>
           <Route path = '/author/:id/delete' element = {<DeleteAuthor/>}/>
           <Route path = '/bookinstance/:id/delete' element = {<DeleteBookInstance/>}/>
+          <Route path = '/book/:id/delete' element = {<DeleteBook/>}/>
           <Route path="*" element={<main style={{ padding: "1rem" }}> <p>There's nothing here!</p> </main>} />
         </Routes>
       </div>

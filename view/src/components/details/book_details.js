@@ -18,7 +18,7 @@ export default function BookDetails(){
         return () => isMounted = false
       }, [post, bookId.id])
     
-    if (!post) return null;
+    if (!post) return (<div className = 'btn-pg-container'>nothing to see here :( (Give it a few seconds!)</div>)
     console.log(post);
     
     return(
@@ -39,7 +39,6 @@ export default function BookDetails(){
                     <h3>Copies</h3>
                     <p style = {{height: '3px', width: '6vw', backgroundColor: 'mediumslateblue'}}></p>
                     <div class = 'overflow-auto' style = {{border: 'solid', borderColor: 'mediumslateblue', borderRadius: '15px'}}>
-
                         <ul className = 'list-group'>
                             {post.book_instances ? 
                                 post.book_instances.map(instance => 
@@ -53,8 +52,9 @@ export default function BookDetails(){
                                     </li>) 
                                 : ""}
                         </ul>
-
                     </div>
+                    <hr/>
+                    <Link to = 'delete' className='text-decoration-none'>Delete book</Link>
                 </div>
             </div>
         </div>
