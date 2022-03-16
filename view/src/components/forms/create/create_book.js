@@ -1,7 +1,7 @@
-import Btn from '../icons/btn'
+import Btn from '../../icons/btn'
 import axios from 'axios'
 import {useState, useEffect} from 'react'
-import './forms.css'
+import '../forms.css'
 import DropdownButton from 'react-bootstrap/DropdownButton'
 import Dropdown from 'react-bootstrap/Dropdown'
 

@@ -1,6 +1,5 @@
 import {useParams, Link} from 'react-router-dom'
 import Btn from '../icons/btn'
-import Status from '../icons/status'
 import axios from 'axios'
 import {useEffect, useState} from 'react'
 

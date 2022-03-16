@@ -1,5 +1,5 @@
-import './forms.css'
-import Btn from '../icons/btn'
+import '../forms.css'
+import Btn from '../../icons/btn'
 import axios from 'axios'
 import {useState, useEffect} from 'react'
 import DropdownButton from 'react-bootstrap/DropdownButton'

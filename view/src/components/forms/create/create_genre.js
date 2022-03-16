@@ -1,7 +1,7 @@
-import Btn from '../icons/btn'
+import Btn from '../../icons/btn'
 import {useState} from 'react'
 import axios from 'axios'
-import './forms.css'
+import '../forms.css'
 
 export default function CreateGenre(){
     const[post, setPost] = useState('');

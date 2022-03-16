@@ -1,7 +1,7 @@
-import Btn from '../icons/btn'
+import Btn from '../../icons/btn'
 import {useState} from 'react'
 import axios from 'axios'
-import './forms.css'
+import '../forms.css'
 
 export default function CreateAuthor(){
     const[first, setFirst] = useState('');
