@@ -124,8 +124,11 @@ exports.book_create_post = [
 // DELETE /catalog/book/:id/delete
 exports.book_delete_post = async function(req, res) {
     try{
-        await (await Book.findByPk(req.params.id)).destroy();
-        res.json('Book successfully deleted!')
+        await BookGenre.destroy({
+            where: {bookId:req.params.id}
+        });
+        (await Book.findByPk(req.params.id)).destroy()
+        res.json('Book successfully deleted!');
     } catch (err){
         console.log('>>>>>>>>>>> ERROR DELETING BOOK: ' + err)
         res.json(err)

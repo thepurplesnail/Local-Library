@@ -76,12 +76,12 @@ export default function CreateBook(){
             <div>
                 <h1>Create book</h1>
                 <form onSubmit = {handleSubmit}>
-                    <label className = 'label'>Title:</label>
+                    <label className = 'label'>Title *</label>
                     <div>
                         <input className = 'form-text text-dark' onChange = {e => {setTitle(e.target.value)}} placeholder = 'Title goes here' value = {title}/>
                     </div>
 
-                    <label className = 'label'>Author:</label>
+                    <label className = 'label'>Author *</label>
                     <div>
                         <DropdownButton id="dropdown-item-button" title = {author ? author.full_name : '--Select author--'}>
                             {authors.map(author => 
@@ -92,17 +92,17 @@ export default function CreateBook(){
                         </DropdownButton>                        
                     </div>
 
-                    <label className = 'label'>Summary:</label>
+                    <label className = 'label'>Summary *</label>
                     <div>
                         <textarea className = 'form-text text-dark' onChange = {e => setSummary(e.target.value)} style = {{height: '10vh', width: '60vw'}} value = {summary} placeholder = 'Summary goes here'/>
                     </div>
 
-                    <label className = 'label'>ISBN:</label>
+                    <label className = 'label'>ISBN *</label>
                     <div>
                         <input className = 'form-text text-dark' onChange = {e => setIsbn(e.target.value)} placeholder = 'ISBN goes here' value = {isbn}/>
                     </div>
 
-                    <label className = 'label'>Genres:</label>
+                    <label className = 'label'>Genres</label>
                     <div className = 'checkboxes-ctnr'>
                         {genres.map(genre => 
                             <div className="form-check" key = {genre.id}>
