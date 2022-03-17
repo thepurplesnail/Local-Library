@@ -90,7 +90,7 @@ export default function CreateBook(){
 
     return(
         <div className = 'btn-pg-container'>
-            <div className = 'btn'><Btn url = '/catalog'/></div>
+            <div className = 'btn'><Btn url = {`/catalog/book/${infoId}`}/></div>
             <div>
                 <h1>Update book</h1>
                 <form onSubmit = {handleSubmit}>
