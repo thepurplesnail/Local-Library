@@ -54,7 +54,9 @@ export default function BookDetails(){
                         </ul>
                     </div>
                     <hr/>
-                    <Link to = 'delete' className='text-decoration-none'>Delete book</Link>
+                    <p>
+                        <Link to = 'delete' className='text-decoration-none'>Delete book</Link> | <Link to = 'update' className='text-decoration-none'>Update book</Link>
+                    </p>
                 </div>
             </div>
         </div>
