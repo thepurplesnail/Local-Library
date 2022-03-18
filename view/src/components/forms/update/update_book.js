@@ -42,28 +42,28 @@ export default function CreateBook(){
         axios.get(`http://localhost:5000/catalog/book/${infoId}`)
         .then(res => {
             if (isMounted) setInfo(res.data);
-            if (info) {
+            if (info && !loaded) {
                 setTitle(info.book.title);
                 setSummary(info.book.summary);
                 setAuthor(info.book.author);
                 setIsbn(info.book.isbn);
-                if (!loaded) {
-                    for (let g of info.book.genres){
-                        let firstChecked = checked.set(g.id, true);
-                        setChecked(firstChecked);
-                    } 
-                    setLoaded(true);
-                }
+                setGenreIdList(info.book.genres.map(g => g.id));
+            
+                for (let g of info.book.genres){
+                    let firstChecked = checked.set(g.id, true);
+                    setChecked(firstChecked);
+                } 
+                setLoaded(true);
+                
             }
         });
         return () => isMounted = false;
-    }, [info]);
+    }, [info, checked, loaded]);
 
     // adds/removes genreId from genreIdList when box is checked/unchecked
     let handleGenre = (e, id) => {
         const updatedCheckedState = checked.set(id,checked.get(id) ? false : true);
         setChecked(updatedCheckedState);
-        console.log(checked.get(id));
         if (e.currentTarget.checked){
             if (e.currentTarget.value){
                 setGenreIdList(genreIdList.concat(e.currentTarget.value));
@@ -71,16 +71,19 @@ export default function CreateBook(){
                 console.log('genre[]: ' + genreIdList);
             }
         } else {
+            console.log('VAL: ' + e.currentTarget.value);
+            console.log('NEW: ' + genreIdList.filter(genreId => genreId !== e.currentTarget.value));
             setGenreIdList(genreIdList.filter(genreId => genreId !== e.currentTarget.value));
+            //setGenreIdList([]);
             console.log('genre[]: ' + genreIdList);
         }
     }
 
-    // make POST request
+    // make PUT request
     let handleSubmit = e => {
         e.preventDefault();
-        axios.post('http://localhost:5000/catalog/book/create', {
-            title: title,
+        axios.put(`http://localhost:5000/catalog/book/${infoId}/update`, {
+            title: String(title),
             summary: summary,
             author: author,
             isbn: isbn,
@@ -88,7 +91,9 @@ export default function CreateBook(){
         })
         .then(res => {
             if (res.data.errors) alert(res.data.errors[0].msg);
-            else alert(res.data);
+            console.log(res);
+            alert(res.data);
+            console.log('genreIdList: ' + genreIdList);
             }
         );
     }
