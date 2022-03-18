@@ -8,7 +8,10 @@ import { useParams } from 'react-router-dom'
 
 export default function CreateBook(){
     //GET all genres
-    const [genres, setGenres] = useState(null);
+    const [genres, setGenres] = useState([]);
+    const [loaded, setLoaded] = useState(false);
+    const [checked, setChecked] = useState(new Map());
+
     useEffect(() => {
         let isMounted = true;
         axios.get('http://localhost:5000/catalog/genres')
@@ -30,8 +33,7 @@ export default function CreateBook(){
     const [author, setAuthor] = useState('');
     const [isbn, setIsbn] = useState('');
     const [genreIdList, setGenreIdList] = useState([]);
-    const [checked, setChecked] = useState(genres ? new Array(genres.length).fill(false) : new Array(5).fill(false))
-
+    
     //GET book detail info
     const infoId = useParams().id;
     const [info, setInfo] = useState(null);
@@ -45,18 +47,23 @@ export default function CreateBook(){
                 setSummary(info.book.summary);
                 setAuthor(info.book.author);
                 setIsbn(info.book.isbn);
+                if (!loaded) {
+                    for (let g of info.book.genres){
+                        let firstChecked = checked.set(g.id, true);
+                        setChecked(firstChecked);
+                    } 
+                    setLoaded(true);
+                }
             }
         });
         return () => isMounted = false;
     }, [info]);
 
     // adds/removes genreId from genreIdList when box is checked/unchecked
-    let handleGenre = (e, pos) => {
-        const updatedCheckedState = checked.map((item, index) =>
-            index === pos ? !item : item
-        );
+    let handleGenre = (e, id) => {
+        const updatedCheckedState = checked.set(id,checked.get(id) ? false : true);
         setChecked(updatedCheckedState);
-
+        console.log(checked.get(id));
         if (e.currentTarget.checked){
             if (e.currentTarget.value){
                 setGenreIdList(genreIdList.concat(e.currentTarget.value));
@@ -122,9 +129,9 @@ export default function CreateBook(){
 
                     <label className = 'label'>Genres</label>
                     <div className = 'checkboxes-ctnr'>
-                        {genres.map((genre, index) => 
+                        {genres.map(genre => 
                             <div className="form-check" key = {genre.id}>
-                                <input className="form-check-input" type="checkbox" value = {genre.id} onChange = {e => handleGenre(e, index)} checked = {checked[index]}/>
+                                <input className="form-check-input" type="checkbox" value = {genre.id} onChange = {e => handleGenre(e, genre.id)} checked = {checked.get(genre.id)}/>
                                 <label className="form-check-label">
                                     {genre.name}
                                 </label>
