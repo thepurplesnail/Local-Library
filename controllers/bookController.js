@@ -9,6 +9,8 @@ var {check, validationResult} = require('express-validator')
 const sequelize = require('../database'); 
 Promise.resolve().then(sequelize.auth());
 
+const escReg = require('../escapeReg.js');
+
 const synchronize = async () => {
     try {
         await Book.sync();
@@ -95,12 +97,13 @@ exports.book_create_post = [
 
     check('author.full_name').trim()
         .isLength({min: 1}).withMessage('Author name is required!').escape(),
+
     async (req, res) => {
         
         const err = validationResult(req);
         let bookDetails = {
-            title: req.body.title,
-            summary: req.body.summary,
+            title: escReg(req.body.title),
+            summary: escReg(req.body.summary),
             isbn: req.body.isbn,
             authorId: req.body.author.id,
         };
@@ -135,7 +138,43 @@ exports.book_delete_post = async function(req, res) {
     }
 };
 
-// Handle book update on POST.
-exports.book_update_post = function(req, res) {
-    res.send('NOT IMPLEMENTED: Book update POST');
-};
+// Handle book update on PUT.
+// PUT /catalog/book/:id/update
+exports.book_update_post = [
+    check('title', 'Title is requiried!').trim().isLength({min: 1}).escape(),
+
+    check('summary').trim()
+        .isLength({min: 1}).withMessage('Summary is required!').escape(),
+
+    check('isbn', 'ISBN is required!').trim().isLength({min: 1}).escape(),
+
+    check('author.full_name').trim()
+        .isLength({min: 1}).withMessage('Author name is required!').escape(),
+
+    async (req, res) => {
+        try {
+            const err = validationResult(req);
+            let bookDetails = {
+                title: escReg(req.body.title),
+                summary: escReg(req.body.summary),
+                isbn: req.body.isbn,
+                authorId: req.body.author.id,
+            }; 
+            if (!err.isEmpty()) res.json(err);
+            else { 
+                let book = await Book.findByPk(req.params.id);
+                book.set(bookDetails);
+                await book.save();
+                await BookGenre.destroy({where: {bookId:req.params.id}});
+                if (req.body.genreIdList) 
+                    for (let gId of req.body.genreIdList){ 
+                        Genre.findByPk(gId).then(genre => book.addGenres(genre)).catch(console.log);
+                    }
+                console.log(`>>>>> Book: ${bookDetails.title} successfully added!`); 
+                res.json('Book successfully updated!');
+            }
+        } catch (err) {
+            res.json('ERROR UPDATING BOOK: ' + err);
+        }
+    }
+];
