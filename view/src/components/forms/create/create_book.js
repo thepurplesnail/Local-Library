@@ -29,13 +29,11 @@ export default function CreateBook(){
     const [author, setAuthor] = useState('');
     const [isbn, setIsbn] = useState('');
     const [genreIdList, setGenreIdList] = useState([]);
-    const [checked, setChecked] = useState(genres ? new Array(genres.length).fill(false) : new Array(5).fill(false))
+    const [checked, setChecked] = useState(new Map());
 
     // adds/removes genreId from genreIdList when box is checked/unchecked
-    let handleGenre = (e, pos) => {
-        const updatedCheckedState = checked.map((item, index) =>
-            index === pos ? !item : item
-        );
+    let handleGenre = (e, id) => {
+        const updatedCheckedState = checked.set(id,checked.get(id) ? false : true);
         setChecked(updatedCheckedState);
 
         if (e.currentTarget.checked){
@@ -71,7 +69,7 @@ export default function CreateBook(){
         setAuthor(null);
         setIsbn('');
         setGenreIdList([]);
-        setChecked(new Array(genres.length).fill(false));
+        setChecked(new Map());
     }
 
     if (!genres || !authors) return <div className = 'btn-pg-container'>Nothing to see here :( Give it some time </div>
@@ -110,9 +108,9 @@ export default function CreateBook(){
 
                     <label className = 'label'>Genres</label>
                     <div className = 'checkboxes-ctnr'>
-                        {genres.map((genre, index) => 
+                        {genres.map(genre => 
                             <div className="form-check" key = {genre.id}>
-                                <input className="form-check-input" type="checkbox" value = {genre.id} onChange = {e => handleGenre(e, index)} checked = {checked[index]}/>
+                                <input className="form-check-input" type="checkbox" value = {genre.id} onChange = {e => handleGenre(e, genre.id)} checked = {checked.get(genre.id)}/>
                                 <label className="form-check-label">
                                     {genre.name}
                                 </label>
