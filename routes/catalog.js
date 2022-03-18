@@ -18,8 +18,8 @@ router.post('/book/create', book_controller.book_create_post);
 // DELETE request to delete Book.
 router.delete('/book/:id/delete', book_controller.book_delete_post);
 
-// POST request to update Book.
-router.post('/book/:id/update', book_controller.book_update_post);
+// PUT request to update Book.
+router.put('/book/:id/update', book_controller.book_update_post);
 
 // GET request for one Book.
 router.get('/book/:id', book_controller.book_detail);
