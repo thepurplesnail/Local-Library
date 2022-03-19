@@ -49,9 +49,7 @@ exports.index = function(req, res) {
             Genre.count()
             .then(c => callback(null, c))
 
-    }).then(results => 
-        setTimeout(() => res.json(results), 500)
-    )
+    }).then(results => res.json(results))
     .catch(err => console.log(err))
     
 };
