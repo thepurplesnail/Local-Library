@@ -1,5 +1,7 @@
 var Genre = require('../models/genre')
 var Book = require('../models/book')
+var BookGenre = require('../models/bookGenre');
+
 var async = require('async')
 const sequelize = require('../database')
 const {validationResult, check} = require("express-validator")
@@ -74,7 +76,7 @@ exports.genre_delete_post = async function(req, res) {
 // Handle Genre update on PUT.
 // PUT /catalog/genre/:id/update
 
-exports.genre_update_post = function(req, res) {
+exports.genre_update_post = [
     check('name', 'Genre name required!').trim().isLength({ min: 1 }).escape(), // genre name is required
 
     check('name').custom(val => {return Genre.findOne({where: {'name': val}}) 
@@ -106,4 +108,4 @@ exports.genre_update_post = function(req, res) {
             }
         }
     }
-};
+];

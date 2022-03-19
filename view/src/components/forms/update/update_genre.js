@@ -43,7 +43,7 @@ export default function UpdateGenre(){
 
     return(
         <div className = 'btn-pg-container'>
-            <div className = 'btn'><Btn url = '/catalog'/></div>
+            <div className = 'btn'><Btn url = {`/catalog/genre/${id}`}/></div>
             <div>
                 <h1>Update genre</h1>
                 <form onSubmit = {handleSubmit}>
