@@ -35,8 +35,8 @@ router.post('/author/create', author_controller.author_create_post);
 // DELETE request to delete Author.
 router.delete('/author/:id/delete', author_controller.author_delete_post);
 
-// POST request to update Author.
-router.post('/author/:id/update', author_controller.author_update_post);
+// PUT request to update Author.
+router.put('/author/:id/update', author_controller.author_update_post);
 
 // GET request for one Author.
 router.get('/author/:id', author_controller.author_detail);

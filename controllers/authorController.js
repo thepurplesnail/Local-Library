@@ -70,12 +70,39 @@ exports.author_delete_post = async function(req, res, next) {
     }
 };
 
-// Display Author update form on GET.
-exports.author_update_get = function(req, res) {
-    res.send('NOT IMPLEMENTED: Author update GET');
-};
-
-// Handle Author update on POST.
-exports.author_update_post = function(req, res) {
-    res.send('NOT IMPLEMENTED: Author update POST');
-};
+// Handle Author update on PUT.
+// PUT /catalog/author/:id/update
+exports.author_update_post = [
+    // Validate and sanitize fields.
+    check('first_name').trim().isLength({ min: 1 }).escape().withMessage('First name must be specified.') // author first name mandatory
+    .isAlphanumeric().withMessage('First name has non-alphanumeric characters.'),
+    check('family_name').trim().isLength({ min: 1 }).escape().withMessage('Family name must be specified.') // author family name mandatory
+        .isAlphanumeric().withMessage('Family name has non-alphanumeric characters.'),
+    check('date_of_birth', 'Invalid date of birth').optional({checkFalsy: true}).isISO8601().toDate().escape(), // check DOB matches yyyy-mm-dd
+    check('date_of_death', 'Invalid date of death').optional({checkFalsy: true}).isISO8601().toDate().escape(), // check DOD matches yyy-mm--dd
+    
+    async (req, res) => {
+        
+        const errors = validationResult(req);
+        if (!errors.isEmpty()) res.json(errors);
+        else {
+            let dateFix = date => date ? date : null;
+            let authorDtls = {
+                first_name: req.body.first_name,
+                family_name: req.body.family_name,
+                date_of_birth: dateFix(req.body.date_of_birth),
+                date_of_death: dateFix(req.body.date_of_death)
+            };
+            try{
+                let author = await Author.findByPk(req.params.id);
+                author.set(authorDtls);
+                await author.save()
+                console.log('>>>>>>AUTHOR DOB: ' + authorDtls.date_of_birth);
+                res.json('Author successfully updated!');
+            } catch (err){
+                res.json(err);
+            }
+        }
+    }
+    
+];

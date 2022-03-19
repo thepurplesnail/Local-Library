@@ -5,10 +5,10 @@ import Btn from '../icons/btn'
 
 export default function AuthorDetails (){
     const [post, setPost] = useState(null)
-    let authorId = useParams();
+    let id = useParams().id;
     useEffect(() => {
         let isMounted = true;
-        axios.get(`http://localhost:5000/catalog/author/${authorId.id}`)
+        axios.get(`http://localhost:5000/catalog/author/${id}`)
         .then(results => {if (isMounted) setPost(results.data)})
         return () => isMounted = false;
     })
@@ -34,7 +34,9 @@ export default function AuthorDetails (){
                     )}
                 </div>
                 <hr/>
-                <Link to = {`delete`} className = "text-decoration-none">Delete author</Link>
+                <p>
+                <Link to = {`delete`} className = "text-decoration-none">Delete author</Link> | <Link to = {`update`} className = "text-decoration-none">Update author</Link>
+                </p>
             </div>
         </div>
     );
