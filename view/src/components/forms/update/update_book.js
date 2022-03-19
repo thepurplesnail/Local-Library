@@ -86,9 +86,7 @@ export default function UpdateBook(){
         })
         .then(res => {
             if (res.data.errors) alert(res.data.errors[0].msg);
-            console.log(res);
-            alert(res.data);
-            console.log('genreIdList: ' + genreIdList);
+            else alert(res.data);
             }
         );
     }
