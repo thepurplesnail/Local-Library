@@ -56,7 +56,7 @@ export default function UpdateBook(){
             }
         });
         return () => isMounted = false;
-    }, [info, checked, loaded]);
+    }, [info, infoId, checked, loaded]);
 
     // adds/removes genreId from genreIdList when box is checked/unchecked
     let handleGenre = (e, id) => {
