@@ -26,13 +26,13 @@ export default function GenreDetails (){
                 <div style = {{width: '60vw'}}>
                     <h3>Books</h3>
                     {post.books.map(book =>
-                        <text>
+                        <span key = {book.id}>
                             <Link to = {`/catalog/book/${book.id}`}
                                 className = 'text-decoration-none'>
                                 <strong>{book.title}</strong>
                             </Link>
                             <p>{book.summary}</p>
-                        </text>
+                        </span>
                     )}
                 </div>
                 <hr/>

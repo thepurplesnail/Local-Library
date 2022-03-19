@@ -6,7 +6,7 @@ import DropdownButton from 'react-bootstrap/DropdownButton'
 import Dropdown from 'react-bootstrap/Dropdown'
 import { useParams } from 'react-router-dom'
 
-export default function CreateBook(){
+export default function UpdateBook(){
     //GET all genres
     const [genres, setGenres] = useState([]);
     const [loaded, setLoaded] = useState(false);
@@ -48,13 +48,11 @@ export default function CreateBook(){
                 setAuthor(info.book.author);
                 setIsbn(info.book.isbn);
                 setGenreIdList(info.book.genres.map(g => g.id));
-            
                 for (let g of info.book.genres){
                     let firstChecked = checked.set(g.id, true);
                     setChecked(firstChecked);
                 } 
                 setLoaded(true);
-                
             }
         });
         return () => isMounted = false;
@@ -64,18 +62,16 @@ export default function CreateBook(){
     let handleGenre = (e, id) => {
         const updatedCheckedState = checked.set(id,checked.get(id) ? false : true);
         setChecked(updatedCheckedState);
+        
         if (e.currentTarget.checked){
-            if (e.currentTarget.value){
-                setGenreIdList(genreIdList.concat(e.currentTarget.value));
-                console.log('genre: ' + e.currentTarget.value);
-                console.log('genre[]: ' + genreIdList);
-            }
+            setGenreIdList(genreIdList.concat(e.currentTarget.value));
+            console.log('genre: ' + e.currentTarget.value);
+            console.log('genre[]: ' + genreIdList);
         } else {
             console.log('VAL: ' + e.currentTarget.value);
-            console.log('NEW: ' + genreIdList.filter(genreId => genreId !== e.currentTarget.value));
-            setGenreIdList(genreIdList.filter(genreId => genreId !== e.currentTarget.value));
+            setGenreIdList(genreIdList.filter(genreId => genreId != e.currentTarget.value));
             console.log('genre[]: ' + genreIdList);
-        }
+        } 
     }
 
     // make PUT request
