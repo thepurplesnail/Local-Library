@@ -15,7 +15,7 @@ export default function Books() {
     return () => (isMounted = false) 
   }, [post]);
 
-  if (!post) return null
+  if (!post) return (<div className = 'btn-pg-container'>nothing to see here :( (Give it a few seconds!)</div>)
 
   return ( 
     <div className = 'btn-pg-container'>
@@ -26,11 +26,11 @@ export default function Books() {
             {post.map(
               book => 
               <li key={book.id} className = 'card total-card'>
-                <text>
+                <span>
                   <Link to = {`/catalog/book/${book.id}`} className = "text-decoration-none">
                     {book.title}
                   </Link> ({book.author.family_name}, {book.author.first_name})
-                </text>
+                </span>
               </li>
               )
             } 

@@ -74,7 +74,6 @@ export default function CreateBook(){
             console.log('VAL: ' + e.currentTarget.value);
             console.log('NEW: ' + genreIdList.filter(genreId => genreId !== e.currentTarget.value));
             setGenreIdList(genreIdList.filter(genreId => genreId !== e.currentTarget.value));
-            //setGenreIdList([]);
             console.log('genre[]: ' + genreIdList);
         }
     }

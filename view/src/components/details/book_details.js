@@ -38,17 +38,17 @@ export default function BookDetails(){
                 <div>
                     <h3>Copies</h3>
                     <p style = {{height: '3px', width: '6vw', backgroundColor: 'mediumslateblue'}}></p>
-                    <div class = 'overflow-auto' style = {{border: 'solid', borderColor: 'mediumslateblue', borderRadius: '15px'}}>
+                    <div className = 'overflow-auto' style = {{border: 'solid', borderColor: 'mediumslateblue', borderRadius: '15px'}}>
                         <ul className = 'list-group'>
                             {post.book_instances ? 
                                 post.book_instances.map(instance => 
                                     <li className = 'card' key = {instance.id} style = {{padding: '1rem'}}>
                                         <Status stat = {instance.status}/>
-                                        <text><strong>Imprint:</strong> {instance.imprint}</text>
-                                        <text>
+                                        <span><strong>Imprint:</strong> {instance.imprint}</span>
+                                        <span>
                                             <strong>Id: </strong>
                                             <Link to = {`/catalog/bookinstance/${instance.id}`} className = 'text-decoration-none'>{instance.id}</Link>
-                                        </text>
+                                        </span>
                                     </li>) 
                                 : ""}
                         </ul>
