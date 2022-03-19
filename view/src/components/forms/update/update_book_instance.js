@@ -5,6 +5,7 @@ import {useState, useEffect} from 'react'
 import DropdownButton from 'react-bootstrap/DropdownButton'
 import Dropdown from 'react-bootstrap/Dropdown'
 import {useParams} from 'react-router-dom'
+import formatTime from '../formatTime'
 
 export default function UpdateBookInstance(){
     const [books, setBooks] = useState(null),
@@ -35,7 +36,7 @@ export default function UpdateBookInstance(){
                 setBook(prior.book);
                 setStatus(prior.status);
                 setImprint(prior.imprint);
-                setDue_Back(prior.due_back);
+                setDue_Back(formatTime(prior.due_back));
                 setLoaded(true);
             }
         });
