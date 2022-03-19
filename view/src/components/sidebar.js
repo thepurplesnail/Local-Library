@@ -22,6 +22,7 @@ import DeleteGenre from './forms/delete/delete_genre.js'
 
 import UpdateBook from './forms/update/update_book'
 import UpdateBookInstance from './forms/update/update_book_instance'
+import UpdateGenre from "./forms/update/update_genre"
 
 export default function Sidebar() {
     return (
@@ -45,21 +46,27 @@ export default function Sidebar() {
           <Route path = '/books/' element = {<Books/>}/>
           <Route path = '/authors' element = {<Authors/>}/>
           <Route path = '/genres' element = {<Genres/>}/>
+
           <Route path = '/bookinstances' element = {<BookInstances/>}/>
           <Route path = '/book/create' element = {<CreateBook/>}/>
           <Route path = '/author/create' element = {<CreateAuthor/>}/>
           <Route path = '/genre/create' element = {<CreateGenre/>}/>
           <Route path = '/bookinstance/create' element = {<CreateBookInstance/>}/>
+
           <Route path = '/book/:id' element = {<BookDetails/>}/>
           <Route path = '/genre/:id' element = {<GenreDetails/>}/>
           <Route path = '/author/:id' element = {<AuthorDetails/>}/>
           <Route path = '/bookinstance/:id' element = {<BookInstanceDetails/>}/>
+
           <Route path = '/author/:id/delete' element = {<DeleteAuthor/>}/>
           <Route path = '/bookinstance/:id/delete' element = {<DeleteBookInstance/>}/>
           <Route path = '/book/:id/delete' element = {<DeleteBook/>}/>
           <Route path = '/genre/:id/delete' element = {<DeleteGenre/>}/>
+
           <Route path = '/book/:id/update' element = {<UpdateBook/>}/>
           <Route path = '/bookinstance/:id/update' element = {<UpdateBookInstance/>}/>
+          <Route path = '/genre/:id/update' element = {<UpdateGenre/>}/>
+
           <Route path="*" element={<main style={{ padding: "1rem" }}> <p>There's nothing here!</p> </main>} />
         </Routes>
       </div>

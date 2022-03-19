@@ -71,7 +71,39 @@ exports.genre_delete_post = async function(req, res) {
     }
 };
 
-// Handle Genre update on POST.
+// Handle Genre update on PUT.
+// PUT /catalog/genre/:id/update
+
 exports.genre_update_post = function(req, res) {
-    res.send('NOT IMPLEMENTED: Genre update POST');
+    check('name', 'Genre name required!').trim().isLength({ min: 1 }).escape(), // genre name is required
+
+    check('name').custom(val => {return Genre.findOne({where: {'name': val}}) 
+    .then(genre => {if (genre) return Promise.reject('Genre already exists!')})}).escape(), // check new genre is unique
+
+    async (req, res, next) => {
+        
+        // Extract the validation errors from a request.
+        const errors = validationResult(req);
+
+        // Create a genre object with escaped and trimmed data.
+        var genreDtls = { name: req.body.name };
+
+        // send any errors
+        if (!errors.isEmpty()) {
+            res.send(errors);
+        }
+
+        // otherwise find and update genre and send success msg
+        else {
+            try{
+                let genre = await Genre.findByPk(req.params.id);
+                genre.set(genreDtls); 
+                await genre.save();
+                res.json(`Genre successfully updated!`);
+            } catch (err){
+                res.json(err);
+                console.log('ERROR UPDATING GENRE: ' + err);
+            }
+        }
+    }
 };

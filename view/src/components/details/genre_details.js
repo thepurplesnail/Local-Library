@@ -16,7 +16,7 @@ export default function GenreDetails (){
         return () => isMounted = false
       }, [post, genreId.id])
     
-    if (!post) return null;
+    if (!post) return <div className = 'btn-pg-container'>Nothing to see here :( Give it some time </div>
     
     return(
         <div className = 'btn-pg-container'>
@@ -36,7 +36,9 @@ export default function GenreDetails (){
                     )}
                 </div>
                 <hr/>
-                <Link to = 'delete' className = "text-decoration-none">Delete genre</Link>
+                <p>
+                <Link to = 'delete' className = "text-decoration-none">Delete genre</Link> | <Link to = 'update' className = "text-decoration-none">Update genre</Link>
+                </p>
             </div>
         </div>
     );
