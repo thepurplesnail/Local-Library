@@ -4,26 +4,39 @@ import axios from 'axios'
 import {useState, useEffect} from 'react'
 import DropdownButton from 'react-bootstrap/DropdownButton'
 import Dropdown from 'react-bootstrap/Dropdown'
+import {useParams} from 'react-router-dom'
 
-export default function CreateBookInstance(){
+export default function UpdateBookInstance(){
     const [books, setBooks] = useState(null),
           [book, setBook] = useState(null),
+          [prior, setPrior] = useState(null),
           [status, setStatus] = useState(null),
           [imprint, setImprint] = useState(''),
-          [due_back, setDue_Back] = useState(undefined);
+          [due_back, setDue_Back] = useState(undefined),
+          [loaded, setLoaded] = useState(false);
     
-    // GET list of all books
+    const bkInstId = useParams().id;
+
+    // GET all books that are in database
     useEffect(()=> {
         let isMounted = true;
         axios.get('http://localhost:5000/catalog/books')
         .then(res => {if (isMounted) setBooks(res.data)});
         return () => isMounted = false;
-    })
-
-    // POST new book instance on submit
+    }, [books])
+/*
+    // GET prior info of bookinstance to be updated
+    useEffect(() =>{
+        let isMounted = true;
+        axios.get(`http://localhost:5000/catalog/bookinstance/${bkInstId}`)
+        .then(res => {if (isMounted) setPrior(res.data)});
+        return () => isMounted = false;
+    }, [prior, bkInstId])
+*/
+    // PUT updated book instance 
     let handleSubmit = e => {
         e.preventDefault();
-        axios.post('http://localhost:5000/catalog/bookinstance/create', {
+        axios.put(`http://localhost:5000/catalog/bookinstance/${bkInstId}/update`, {
             bk: book,
             imprint: imprint,
             status: status,
@@ -33,26 +46,22 @@ export default function CreateBookInstance(){
             else alert(res.data);
             }
         );
-        // Reset entries
-        setBook(null);
-        setStatus(null);
-        setImprint('');
-        setDue_Back('');
     }
 
+    
     if (!books) return <div className = 'btn-pg-container'>nothing to see here :( Give it some time!</div>
 
     return(
         <div className = 'btn-pg-container'>
             <div className = 'btn'><Btn url = '/catalog'/></div>
             <div>
-                <h1>Create book instance</h1>
+                <h1>Update book instance</h1>
                 <form onSubmit = {handleSubmit}>
                     <label className = 'label'>Book *</label>
                     <div>
                         <DropdownButton id="dropdown-item-button" title = {book ? book.title : '--select book--'}>
                             {books.map(book => 
-                                <div onClick = {() => setBook(book)} key = {book.id}>
+                                <div onClick = {() => {setBook(book); console.log(book.title);}} key = {book.id}>
                                     <Dropdown.Item>{book.title}</Dropdown.Item>
                                 </div>
                             )}

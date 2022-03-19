@@ -11,7 +11,8 @@ export default function BookInstanceDetails(){
     useEffect(() =>{
         let isMounted = true;
         axios.get(`http://localhost:5000/catalog/bookinstance/${bookinstanceId}`)
-        .then(res => {if (isMounted) setPost(res.data)})
+        .then(res => {if (isMounted) setPost(res.data)});
+        return () => isMounted = false;
     }, [post, bookinstanceId])
 
     if (!post) return(<div className = 'btn-pg-container'>nothing to see here :( (Give it a few seconds!)</div>)
@@ -26,7 +27,9 @@ export default function BookInstanceDetails(){
                 <p><strong>Status:</strong> <Status stat = {post.status} /></p>
                 <p><strong>Due Back:</strong> {post.due_back_formatted}</p>
                 <hr/>
-                <Link to = 'delete' className = "text-decoration-none">Delete book instance</Link>
+                <p>
+                <Link to = 'delete' className = "text-decoration-none">Delete book instance</Link> | <Link to = 'update' className = "text-decoration-none">Update book instance</Link>
+                </p>
             </div>
         </div>
     );
