@@ -24,15 +24,24 @@ export default function UpdateBookInstance(){
         .then(res => {if (isMounted) setBooks(res.data)});
         return () => isMounted = false;
     }, [books])
-/*
+
     // GET prior info of bookinstance to be updated
     useEffect(() =>{
         let isMounted = true;
         axios.get(`http://localhost:5000/catalog/bookinstance/${bkInstId}`)
-        .then(res => {if (isMounted) setPrior(res.data)});
+        .then(res => {
+            if (isMounted) setPrior(res.data);
+            if (!loaded && prior){
+                setBook(prior.book);
+                setStatus(prior.status);
+                setImprint(prior.imprint);
+                setDue_Back(prior.due_back);
+                setLoaded(true);
+            }
+        });
         return () => isMounted = false;
     }, [prior, bkInstId])
-*/
+
     // PUT updated book instance 
     let handleSubmit = e => {
         e.preventDefault();
@@ -53,7 +62,7 @@ export default function UpdateBookInstance(){
 
     return(
         <div className = 'btn-pg-container'>
-            <div className = 'btn'><Btn url = '/catalog'/></div>
+            <div className = 'btn'><Btn url = {`/catalog/bookinstance/${bkInstId}`}/></div>
             <div>
                 <h1>Update book instance</h1>
                 <form onSubmit = {handleSubmit}>
